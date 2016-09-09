@@ -1,6 +1,6 @@
 {
-    "appSecret": "1c23da1e791eb2a3a2b837a620df368c",
-    "pageAccessToken": "EAACEdEose0cBABrgsef9YscA86EahZBhZCZAmMKZAnlZCNUFjwlQ0Tjdn6EWxTURyPitMR34Gnpo8llf4HiiSbQBZAHrYvgsPi9b73EuX9y5E9dAw33kZCLEq47SEWHYsHx2rk2ojEZCSsghj8sUmUtoedmwSwK8F5h9pd79zQN6ewZDZD",
-    "validationToken": "test",
-    "serverURL": "https://byllme.herokuapp.com"
+    "appSecret": "",
+    "pageAccessToken": "",
+    "validationToken": "",
+    "serverURL": ""
 }
