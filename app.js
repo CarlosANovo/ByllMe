@@ -281,7 +281,7 @@ function receivedMessage(event) {
 			// eg m[0] etc.
 
 			// ADD USER or JUST ADD EXPENSE
-			sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
+			sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
 		}
 
 
@@ -295,7 +295,7 @@ function receivedMessage(event) {
 			}
 
 			// Remove expense or give warning
-			sendTextMessage(senderID, "I'll remove the expense of " + n[0] + ", for the value of " + n[2] + "€");
+			sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
 		}
 		
 
