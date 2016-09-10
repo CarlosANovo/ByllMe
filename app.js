@@ -32,8 +32,7 @@ app.use(express.static('public'));
 var byllSchema = new mongoose.Schema({
     id: Number,
     person: String,
-    price: Number,
-    percentage: Number
+    price: Number
 });
 
 var Bill = mongoose.model("Bill", byllSchema);
@@ -282,6 +281,12 @@ function receivedMessage(event) {
 
 			// ADD USER or JUST ADD EXPENSE
 			sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
+            var newUser = {
+                id: senderID,
+                person: m[1],
+                price: Number(m[3])
+            };
+            Bill.create(newUser);
 		}
 
 
@@ -339,13 +344,7 @@ function receivedMessage(event) {
 
             case "add users":
             case "add user":
-                var newUser = {
-                    id: senderID,
-                    person: "person",
-                    price: 999,
-                    percentage: 15
-                };
-                Bill.create(newUser);
+
                 // Procedure to add multiple users at once...
                 break;
 
