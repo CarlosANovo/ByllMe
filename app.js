@@ -349,6 +349,7 @@ function receivedMessage(event) {
                         results.forEach(function (result) {
 
                         });
+                        sendTextMessage(senderID, "WORKING BIATCH!");
                     } else if(!error && results.length< 2){
                         sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
                     } else {
