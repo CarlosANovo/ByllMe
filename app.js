@@ -280,7 +280,7 @@ function receivedMessage(event) {
 			// View your result using the m-variable.
 			// eg m[0] etc.
 		}
-		if (typeof m != NULL){
+		if (typeof m != 'undefined'){
 			// ADD USER or JUST ADD EXPENSE
 			sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
 		}
