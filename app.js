@@ -16,14 +16,24 @@ const
     crypto = require('crypto'),
     express = require('express'),
     https = require('https'),
-    request = require('request');
+    request = require('request'),
+    mongoose = require("mongoose");
 
 var app = express();
+mongoose.connect("mongodb://gpereira.tk/yelp_camp");
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({verify: verifyRequestSignature}));
 app.use(express.static('public'));
 
+
+var campgroundSchema = new mongoose.Schema({
+    name: String,
+    image: String,
+    description: String
+});
+
+var Campground = mongoose.model("Campground", campgroundSchema);
 /*
  * Be sure to setup your config values before running this code. You can 
  * set them using environment variables or modifying the config file in /config.
@@ -80,6 +90,7 @@ app.get('/webhook', function (req, res) {
  * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
  *
  */
+var people = [];
 app.post('/webhook', function (req, res) {
     var data = req.body;
 
@@ -87,7 +98,6 @@ app.post('/webhook', function (req, res) {
     if (data.object == 'page') {
         // Iterate over each entry
         // There may be multiple if batched
-        sendTextMessage(senderID, "Say \"hi\" to start!");
         data.entry.forEach(function (pageEntry) {
             var pageID = pageEntry.id;
             var timeOfEvent = pageEntry.time;
@@ -256,7 +266,14 @@ function receivedMessage(event) {
         // keywords and send back the corresponding example. Otherwise, just echo
         // the text we received.
         switch (messageText) {
-            case "hi":
+            case "db":
+                Campground.find({name:"Granite Hill"}, function (error, result) {
+                    if(!error) {
+                        sendTextMessage(senderID, result.name);
+                    } else{
+                        sendTextMessage(senderID, error);
+                    }
+                });
                 break;
 
             default:
@@ -590,7 +607,7 @@ function sendReceiptMessage(recipientId) {
                     template_type: "receipt",
                     recipient_name: "Peter Chang",
                     order_number: receiptId,
-                    currency: "USD",
+                    currency: "EUR",
                     payment_method: "Visa 1234",
                     timestamp: "1428444852",
                     elements: [{
