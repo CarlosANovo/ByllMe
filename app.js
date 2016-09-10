@@ -374,7 +374,8 @@ function receivedMessage(event) {
                 break;
 
             case "results":
-                Bill.sort({price: 1}, function (error) {
+
+                /*Bill.sort({price: 1}, function (error) {
                     if (!error) {
                         Bill.find({}, function (error, results) {
                             if (!error && results.length > 2) {
@@ -399,7 +400,7 @@ function receivedMessage(event) {
 
                         });
                     }
-                });
+                });*/
 
                 break;
 
