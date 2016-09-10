@@ -268,36 +268,36 @@ function receivedMessage(event) {
         // If we receive a text message, check to see if it matches any special
         // keywords and send back the corresponding example. Otherwise, just echo
         // the text we received.
-		
-		var re = /^(.+?)\s(paid|spent)\s(.+?)€/; 
-		var str = messageText;
-		var m;
- 
-		if ((m = re.exec(str)) !== null) {
-			if (m.index === re.lastIndex) {
-				re.lastIndex++;
-			}
-			// View your result using the m-variable.
-			// eg m[0] etc.
 
-			// ADD USER or JUST ADD EXPENSE
-			sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
-		}
+        var re = /^(.+?)\s(paid|spent)\s(.+?)€/;
+        var str = messageText;
+        var m;
+
+        if ((m = re.exec(str)) !== null) {
+            if (m.index === re.lastIndex) {
+                re.lastIndex++;
+            }
+            // View your result using the m-variable.
+            // eg m[0] etc.
+
+            // ADD USER or JUST ADD EXPENSE
+            sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
+        }
 
 
-		re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
-		str = messageText;
-		var n;
+        re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
+        str = messageText;
+        var n;
 
-		if ((n = re.exec(str)) !== null) {
-			if (n.index === re.lastIndex) {
-				re.lastIndex++;
-			}
+        if ((n = re.exec(str)) !== null) {
+            if (n.index === re.lastIndex) {
+                re.lastIndex++;
+            }
 
-			// Remove expense or give warning
-			sendTextMessage(senderID, "I'll remove the expense of " + n[0] + ", for the value of " + n[2] + "€");
-		}
-		
+            // Remove expense or give warning
+            sendTextMessage(senderID, "I'll remove the expense of " + n[0] + ", for the value of " + n[2] + "€");
+        }
+
 
         switch (messageText.toLowerCase()) {
             case "hi":
@@ -360,13 +360,11 @@ function receivedMessage(event) {
                 break;
 
             case "db":
-                Bill.find({}, function (error, result) {
+                Bill.find({}, function (error, results) {
                     if (!error) {
-                        Bill.find({}, function (error, results) {
-                            results.forEach(function (result) {
-                                sendTextMessage(senderID, result.name);
-                            })
-                        });
+                        results.forEach(function (result) {
+                            sendTextMessage(senderID, result.name);
+                        })
                     } else {
                         sendTextMessage(senderID, error);
                     }
@@ -376,31 +374,31 @@ function receivedMessage(event) {
             case "results":
 
                 /*Bill.sort({price: 1}, function (error) {
-                    if (!error) {
-                        Bill.find({}, function (error, results) {
-                            if (!error && results.length > 2) {
-                                var sum = 0;
-                                var n = 0;
-                                results.forEach(function (result) {
-                                    sum += result.price;
-                                    n++;
-                                });
-                                var average = sum / n;
-                                results.forEach(function (result) {
+                 if (!error) {
+                 Bill.find({}, function (error, results) {
+                 if (!error && results.length > 2) {
+                 var sum = 0;
+                 var n = 0;
+                 results.forEach(function (result) {
+                 sum += result.price;
+                 n++;
+                 });
+                 var average = sum / n;
+                 results.forEach(function (result) {
 
-                                });
-                                sendTextMessage(senderID, "WORKING BIATCH!");
-                            } else if (!error && results.length == 2) {
-                                sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
-                            } else if (!error && results.length < 2) {
-                                sendTextMessage(senderID, "No split needed...");
-                            } else {
-                                sendTextMessage(senderID, error);
-                            }
+                 });
+                 sendTextMessage(senderID, "WORKING BIATCH!");
+                 } else if (!error && results.length == 2) {
+                 sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
+                 } else if (!error && results.length < 2) {
+                 sendTextMessage(senderID, "No split needed...");
+                 } else {
+                 sendTextMessage(senderID, error);
+                 }
 
-                        });
-                    }
-                });*/
+                 });
+                 }
+                 });*/
 
                 break;
 
