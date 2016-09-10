@@ -20,7 +20,7 @@ const
     mongoose = require("mongoose");
 
 var app = express();
-mongoose.connect("mongodb://gpereira.tk/yelp_camp");
+mongoose.connect("mongodb://gpereira.tk/Byll");
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({verify: verifyRequestSignature}));
