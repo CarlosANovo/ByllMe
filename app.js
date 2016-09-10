@@ -273,14 +273,14 @@ function receivedMessage(event) {
 		var str = messageText;
 		var m;
  
-		if ((m = re.exec(str)) !== 'undefined') {
+		if ((m = re.exec(str)) !== null) {
 			if (m.index === re.lastIndex) {
 				re.lastIndex++;
 			}
 			// View your result using the m-variable.
 			// eg m[0] etc.
 		}
-		if (typeof m != 'undefined'){
+		if (typeof m !== 'undefined'){
 			// ADD USER or JUST ADD EXPENSE
 			sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
 		}
@@ -289,12 +289,12 @@ function receivedMessage(event) {
 		var str = messageText;
 		var n;
  
-		if ((n = re.exec(str)) !== 'undefined') {
+		if ((n = re.exec(str)) !== null) {
 			if (n.index === re.lastIndex) {
 				re.lastIndex++;
 			}
 		}
-		if (typeof n != NULL){
+		if (typeof n !== 'undefined'){
 			// Remove expense or give warning
 			sendTextMessage(senderID, "I'll remove the expense of " + n[0] + ", for the value of " + n[2] + "€");
 		}
