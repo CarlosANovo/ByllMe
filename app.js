@@ -19,9 +19,10 @@ const
     request = require('request'),
     mongoose = require("mongoose");
 
+
 var app = express();
-mongoose.connect("mongodb://gpereira.tk/byll");
-app.set('port', process.env.PORT || 5000);
+mongoose.connect("mongodb://localhost/byll");
+app.set('port', process.env.PORT || 80);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({verify: verifyRequestSignature}));
 app.use(express.static('public'));
@@ -315,7 +316,7 @@ function receivedMessage(event) {
             case "split the bill":
                 // ....
                 break;
-		
+
             case "db":
                 Bill.find({}, function (error, result) {
                     if (!error) {
