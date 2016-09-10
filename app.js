@@ -321,19 +321,6 @@ function receivedMessage(event) {
                 // ....
                 break;
 
-            case "db":
-                Bill.find({}, function (error, result) {
-                    if (!error) {
-                        Bill.find({}, function (error, results) {
-                            results.forEach(function (result) {
-                                sendTextMessage(senderID, result.name);
-                            })
-                        });
-                    } else {
-                        sendTextMessage(senderID, error);
-                    }
-                });
-                break;
 
 
             default:
