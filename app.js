@@ -320,7 +320,7 @@ function receivedMessage(event) {
             case "split the bill":
                 // ....
                 break;
-
+		/*
             case "db":
                 Bill.find({}, function (error, result) {
                     if (!error) {
@@ -364,7 +364,7 @@ function receivedMessage(event) {
                 });
 
                 break;
-
+*/
             default:
                 sendTextMessage(senderID, "I'm not sure I understood that... Type 'help' to see the commands I understand.");
 
