@@ -268,37 +268,36 @@ function receivedMessage(event) {
         // If we receive a text message, check to see if it matches any special
         // keywords and send back the corresponding example. Otherwise, just echo
         // the text we received.
+		
+		var re = /^(.+?)\s(paid|spent)\s(.+?)€/; 
+		var str = messageText;
+		var m;
+ 
+		if ((m = re.exec(str)) !== null) {
+			if (m.index === re.lastIndex) {
+				re.lastIndex++;
+			}
+			// View your result using the m-variable.
+			// eg m[0] etc.
 
-        var re = /^(.+?)\s(paid|spent)\s(.+?)€/;
-        var str = messageText;
-        var m;
+			// ADD USER or JUST ADD EXPENSE
+			sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
+		}
 
-        if ((m = re.exec(str)) !== 'undefined') {
-            if (m.index === re.lastIndex) {
-                re.lastIndex++;
-            }
-            // View your result using the m-variable.
-            // eg m[0] etc.
-        }
-        if (typeof m != 'undefined') {
-            // ADD USER or JUST ADD EXPENSE
-            sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
-        }
 
-        var re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
-        var str = messageText;
-        var n;
+		re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
+		str = messageText;
+		var n;
 
-        if ((n = re.exec(str)) !== 'undefined') {
-            if (n.index === re.lastIndex) {
-                re.lastIndex++;
-            }
-        }
-        if (typeof n != NULL) {
-            // Remove expense or give warning
-            sendTextMessage(senderID, "I'll remove the expense of " + n[0] + ", for the value of " + n[2] + "€");
-        }
+		if ((n = re.exec(str)) !== null) {
+			if (n.index === re.lastIndex) {
+				re.lastIndex++;
+			}
 
+			// Remove expense or give warning
+			sendTextMessage(senderID, "I'll remove the expense of " + n[0] + ", for the value of " + n[2] + "€");
+		}
+		
 
         switch (messageText.toLowerCase()) {
             case "hi":
@@ -357,20 +356,7 @@ function receivedMessage(event) {
                 break;
 
             case "split the bill":
-                Bill.sort({price:1});
-                Bill.find({id: senderID}, function (error, results) {
-                    if (!error) {
-                        var sum = 0;
-                        results.forEach(function (result) {
-                            sum += result.price;
-                        });
-                        var average = sum / results.length;
-                        for (var i = 0; i < results.lenght; i++) {
-                            results[i] -= average;
-                            sendTextMessage(senderID, results[i].person + " has a balance of " + results[i].price);
-                        }
-                    }
-                });
+                // ....
                 break;
 
             case "db":
