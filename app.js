@@ -20,20 +20,20 @@ const
     mongoose = require("mongoose");
 
 var app = express();
-mongoose.connect("mongodb://gpereira.tk/yelp_camp");
+mongoose.connect("mongodb://gpereira.tk/Byll");
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({verify: verifyRequestSignature}));
 app.use(express.static('public'));
 
 
-var campgroundSchema = new mongoose.Schema({
-    name: String,
+var byllSchema = new mongoose.Schema({
+    id: String,
     image: String,
     description: String
 });
 
-var Campground = mongoose.model("Campground", campgroundSchema);
+var Campground = mongoose.model("Campground", byllSchema);
 /*
  * Be sure to setup your config values before running this code. You can 
  * set them using environment variables or modifying the config file in /config.
@@ -266,6 +266,9 @@ function receivedMessage(event) {
         // keywords and send back the corresponding example. Otherwise, just echo
         // the text we received.
         switch (messageText) {
+            case "id":
+                sendTextMessage(senderID, senderID);
+                break;
             case "db":
                 Campground.find({name:"Granite Hill"}, function (error, result) {
                     if(!error) {
