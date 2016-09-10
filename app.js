@@ -280,13 +280,15 @@ function receivedMessage(event) {
 			// View your result using the m-variable.
 			// eg m[0] etc.
 		}
-		if (typeof m !== 'undefined'){
+		
+		if (m.index != 0){
 			// ADD USER or JUST ADD EXPENSE
 			sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
 		}
 		
-		var re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/; 
-		var str = messageText;
+		/*
+		re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/; 
+		str = messageText;
 		var n;
  
 		if ((n = re.exec(str)) !== null) {
@@ -294,11 +296,12 @@ function receivedMessage(event) {
 				re.lastIndex++;
 			}
 		}
+		
 		if (typeof n !== 'undefined'){
 			// Remove expense or give warning
 			sendTextMessage(senderID, "I'll remove the expense of " + n[0] + ", for the value of " + n[2] + "€");
 		}
-		
+		*/
 		
 
         switch (messageText.toLowerCase()) {
