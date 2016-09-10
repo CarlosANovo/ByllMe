@@ -20,22 +20,22 @@ const
     mongoose = require("mongoose");
 
 var app = express();
-mongoose.connect("mongodb://gpereira.tk/Byll");
+mongoose.connect("mongodb://gpereira.tk/yelp_camp");
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({verify: verifyRequestSignature}));
 app.use(express.static('public'));
 
 
-var byllSchema = new mongoose.Schema({
-    id: Number,
-    person: String,
-    price: Number
+var campgroundSchema = new mongoose.Schema({
+    name: String,
+    image: String,
+    description: String
 });
 
-var Bill = mongoose.model("Bill", byllSchema);
+var Campground = mongoose.model("Campground", campgroundSchema);
 /*
- * Be sure to setup your config values before running this code. You can 
+ * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
  *
  */
@@ -55,8 +55,8 @@ const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
     (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
     config.get('pageAccessToken');
 
-// URL where the app is running (include protocol). Used to point to scripts and 
-// assets located at this address. 
+// URL where the app is running (include protocol). Used to point to scripts and
+// assets located at this address.
 const SERVER_URL = (process.env.SERVER_URL) ?
     (process.env.SERVER_URL) :
     config.get('serverURL');
@@ -67,7 +67,7 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
 }
 
 /*
- * Use your own validation token. Check that the token used in the Webhook 
+ * Use your own validation token. Check that the token used in the Webhook
  * setup is the same token used here.
  *
  */
@@ -86,7 +86,7 @@ app.get('/webhook', function (req, res) {
 /*
  * All callbacks for Messenger are POST-ed. They will be sent to the same
  * webhook. Be sure to subscribe your app to your page to receive callbacks
- * for your page. 
+ * for your page.
  * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
  *
  */
@@ -132,8 +132,8 @@ app.post('/webhook', function (req, res) {
 
 /*
  * This path is used for account linking. The account linking call-to-action
- * (sendAccountLinking) is pointed to this URL. 
- * 
+ * (sendAccountLinking) is pointed to this URL.
+ *
  */
 app.get('/authorize', function (req, res) {
     var accountLinkingToken = req.query['account_linking_token'];
@@ -154,8 +154,8 @@ app.get('/authorize', function (req, res) {
 });
 
 /*
- * Verify that the callback came from Facebook. Using the App Secret from 
- * the App Dashboard, we can verify the signature that is sent with each 
+ * Verify that the callback came from Facebook. Using the App Secret from
+ * the App Dashboard, we can verify the signature that is sent with each
  * callback in the x-hub-signature field, located in the header.
  *
  * https://developers.facebook.com/docs/graph-api/webhooks#setup
@@ -186,8 +186,8 @@ function verifyRequestSignature(req, res, buf) {
 /*
  * Authorization Event
  *
- * The value for 'optin.ref' is defined in the entry point. For the "Send to 
- * Messenger" plugin, it is the 'data-ref' field. Read more at 
+ * The value for 'optin.ref' is defined in the entry point. For the "Send to
+ * Messenger" plugin, it is the 'data-ref' field. Read more at
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/authentication
  *
  */
@@ -215,16 +215,16 @@ function receivedAuthentication(event) {
 /*
  * Message Event
  *
- * This event is called when a message is sent to your page. The 'message' 
+ * This event is called when a message is sent to your page. The 'message'
  * object format can vary depending on the kind of message that was received.
  * Read more at https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-received
  *
- * For this example, we're going to echo any text that we get. If we get some 
+ * For this example, we're going to echo any text that we get. If we get some
  * special keywords ('button', 'generic', 'receipt'), then we'll send back
- * examples of those bubbles to illustrate the special message bubbles we've 
- * created. If we receive a message with an attachment (image, video, audio), 
+ * examples of those bubbles to illustrate the special message bubbles we've
+ * created. If we receive a message with an attachment (image, video, audio),
  * then we'll simply confirm that we've received the attachment.
- * 
+ *
  */
 function receivedMessage(event) {
     var senderID = event.sender.id;
@@ -265,53 +265,87 @@ function receivedMessage(event) {
         // If we receive a text message, check to see if it matches any special
         // keywords and send back the corresponding example. Otherwise, just echo
         // the text we received.
-        switch (messageText) {
-            case "db":
-                Bill.find({}, function (error, result) {
-                    if (!error) {
-                        Bill.find({}, function (error, results) {
-                            results.forEach(function (result) {
-                                sendTextMessage(senderID, result.name);
-                            })
-                        });
-                    } else {
-                        sendTextMessage(senderID, error);
-                    }
-                });
-                break;
+        switch (messageText.toLowerCase()) {
+          case "hi":
+          case "hello":
+          case "hey":
+          case "good morning":
+          case "good evening":
+          case "good night":
+              sendTextMessage(senderID, "Hi! My name is Byll, I'm here to help you split your bills with your friends...");
+              sendTextMessage(senderID, "Type 'help' to see the words I understand :)");
+              break;
 
-            case "results":
-                Bill.sort({price: 1});
-                Bill.find({}, function (error, results) {
-                    var sum = 0;
-                    var n = 0;
-                    results.forEach(function (result) {
-                        sum += result;
-                        n++;
-                    });
-                    var average = sum / n;
-                    for (var i = 0; i < results.length; i++) {
-                        if (results[i].price != average && results[i].price < 0 && results[i + 1]) {
+          case "help":
+          case "?":
+          case "commands":
+              sendTextMessage(senderID, "Type 'start' or 'begin' to start a new session. Record everyone's expenses and split the bill at the end.");
+              sendTextMessage(senderID, "Add your your friends by simply saying 'Add John', 'Mary paid 20€' or 'Steve spent 10.43€'... If you wish to add many people at once, type 'Add users'.");
+              sendTextMessage(senderID, "Remove someone with (for example) 'Remove Steve'.");
+              sendTextMessage(senderID, "Check the current status, and see how much money each user spent so far using 'stats' or 'current'.");
+              sendTextMessage(senderID, "Remove everything and start over with 'reset' or 'fresh start'.");
+              sendTextMessage(senderID, "When you're done, just 'split the bill'! ;)");
+              break;
 
-                        }
-                    }
+          case "start recording":
+          case "start":
+          case "begin":
+              // START A NEW SENDER ID ON DATABASE
+              /*
+              if it already exists:
+              sendTextMessage(senderID, "There's a session running already. Use 'reset' if you want to start over.");
+              */
 
-                });
-                break;
+              sendTextMessage(senderID, "I just started a new session :) Add users, or simply start adding expenses...");
+              break;
 
-            default:
-                sendTextMessage(senderID, "I don't understand that...");
+          case "fresh start":
+          case "reset":
+              //Similar to start, but removes everything first
+              break;
+
+          case "add users":
+          case "add user":
+              // Procedure to add multiple users at once...
+              break;
+
+          case "status":
+          case "stats":
+          case "current":
+              //Displays current status...
+              break;
+
+          case "split the bill":
+              // ....
+              break;
+
+          case "db":
+              Campground.find({name:"Granite Hill"}, function (error, result) {
+                  if(!error) {
+                      sendTextMessage(senderID, result[0].name);
+                  } else{
+                      sendTextMessage(senderID, error);
+                  }
+              });
+              break;
+
+          default:
+                sendTextMessage(senderID, "I'm not sure I understood that... Type 'help' to see the commands I understand.");
         }
     } else if (messageAttachments) {
-        sendTextMessage(senderID, "Message with attachment received");
+        sendTextMessage(senderID, "I can't process attachments... Type 'help' to see the commands I understand.");
     }
+
+
+
+
 }
 
 
 /*
  * Delivery Confirmation Event
  *
- * This event is sent to confirm the delivery of a message. Read more about 
+ * This event is sent to confirm the delivery of a message. Read more about
  * these fields at https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-delivered
  *
  */
@@ -337,9 +371,9 @@ function receivedDeliveryConfirmation(event) {
 /*
  * Postback Event
  *
- * This event is called when a postback is tapped on a Structured Message. 
+ * This event is called when a postback is tapped on a Structured Message.
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/postback-received
- * 
+ *
  */
 function receivedPostback(event) {
     var senderID = event.sender.id;
@@ -363,7 +397,7 @@ function receivedPostback(event) {
  *
  * This event is called when a previously-sent message has been read.
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-read
- * 
+ *
  */
 function receivedMessageRead(event) {
     var senderID = event.sender.id;
@@ -383,7 +417,7 @@ function receivedMessageRead(event) {
  * This event is called when the Link Account or UnLink Account action has been
  * tapped.
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/account-linking
- * 
+ *
  */
 function receivedAccountLink(event) {
     var senderID = event.sender.id;
@@ -791,8 +825,8 @@ function sendAccountLinking(recipientId) {
 }
 
 /*
- * Call the Send API. The message data goes in the body. If successful, we'll 
- * get the message id in a response 
+ * Call the Send API. The message data goes in the body. If successful, we'll
+ * get the message id in a response
  *
  */
 function callSendAPI(messageData) {
@@ -821,11 +855,10 @@ function callSendAPI(messageData) {
 }
 
 // Start server
-// Webhooks must be available via SSL with a certificate signed by a valid 
+// Webhooks must be available via SSL with a certificate signed by a valid
 // certificate authority.
 app.listen(app.get('port'), function () {
     console.log('Node app is running on port', app.get('port'));
 });
 
 module.exports = app;
-
