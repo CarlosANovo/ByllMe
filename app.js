@@ -321,7 +321,49 @@ function receivedMessage(event) {
                 // ....
                 break;
 
+            case "db":
+                Bill.find({}, function (error, result) {
+                    if (!error) {
+                        Bill.find({}, function (error, results) {
+                            results.forEach(function (result) {
+                                sendTextMessage(senderID, result.name);
+                            })
+                        });
+                    } else {
+                        sendTextMessage(senderID, error);
+                    }
+                });
+                break;
 
+            case "results":
+                Bill.sort({price: 1}, function (error) {
+                    if (!error) {
+                        Bill.find({}, function (error, results) {
+                            if (!error && results.length > 2) {
+                                var sum = 0;
+                                var n = 0;
+                                results.forEach(function (result) {
+                                    sum += result.price;
+                                    n++;
+                                });
+                                var average = sum / n;
+                                results.forEach(function (result) {
+
+                                });
+                                sendTextMessage(senderID, "WORKING BIATCH!");
+                            } else if (!error && results.length == 2) {
+                                sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
+                            } else if (!error && results.length < 2) {
+                                sendTextMessage(senderID, "No split needed...");
+                            } else {
+                                sendTextMessage(senderID, error);
+                            }
+
+                        });
+                    }
+                });
+
+                break;
 
             default:
                 sendTextMessage(senderID, "I'm not sure I understood that... Type 'help' to see the commands I understand.");
