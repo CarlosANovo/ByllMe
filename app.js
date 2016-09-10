@@ -21,7 +21,7 @@ const
 
 
 var app = express();
-/*mongoose.connect("mongodb://localhost/byll");*/
+mongoose.connect("mongodb://iswon.tk/bill");
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({verify: verifyRequestSignature}));
@@ -36,6 +36,13 @@ var byllSchema = new mongoose.Schema({
 });
 
 var Bill = mongoose.model("Bill", byllSchema);
+
+Bill.create({
+    id: 45656,
+    person: "Biatch",
+    price: 4846,
+    percentage: 45
+});
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
