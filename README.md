@@ -1,4 +1,4 @@
-# ByllMe
+# [**ByllMe**](https://www.messenger.com/t/ByllMe)
 
 Meet your friends. Go out. Let **Byll** split the bills for you.
 
