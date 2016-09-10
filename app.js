@@ -27,13 +27,14 @@ app.use(bodyParser.json({verify: verifyRequestSignature}));
 app.use(express.static('public'));
 
 
-var campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
+var byllSchema = new mongoose.Schema({
+    id: Number,
+    person: String,
+    price: Number,
+    percentage: Number
 });
 
-var Campground = mongoose.model("Campground", campgroundSchema);
+var Bill = mongoose.model("Bill", campgroundSchema);
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
@@ -265,6 +266,7 @@ function receivedMessage(event) {
         // If we receive a text message, check to see if it matches any special
         // keywords and send back the corresponding example. Otherwise, just echo
         // the text we received.
+
         switch (messageText.toLowerCase()) {
           case "hi":
           case "hello":
@@ -319,18 +321,37 @@ function receivedMessage(event) {
               // ....
               break;
 
-          case "db":
-              Campground.find({name:"Granite Hill"}, function (error, result) {
-                  if(!error) {
-                      sendTextMessage(senderID, result[0].name);
-                  } else{
-                      sendTextMessage(senderID, error);
-                  }
-              });
-              break;
+            case "db":
+                Bill.find({}, function (error, result) {
+                    if (!error) {
+                        Bill.find({}, function (error, results) {
+                            results.forEach(function (result) {
+                                sendTextMessage(senderID, result.name);
+                            })
+                        });
+                    } else {
+                        sendTextMessage(senderID, error);
+                    }
+                });
+                break;
 
-          default:
+            case "results":
+                Bill.sort({price: 1});
+                Bill.find({}, function (error, results) {
+                    var sum = 0;
+                    var n = 0;
+                    results.forEach(function (result) {
+                        sum += result.price;
+                        n++;
+                    });
+                    var average = sum / n;
+
+                });
+                break;
+				
+			default:
                 sendTextMessage(senderID, "I'm not sure I understood that... Type 'help' to see the commands I understand.");
+
         }
     } else if (messageAttachments) {
         sendTextMessage(senderID, "I can't process attachments... Type 'help' to see the commands I understand.");
