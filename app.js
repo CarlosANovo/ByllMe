@@ -34,7 +34,7 @@ var byllSchema = new mongoose.Schema({
     percentage: Number
 });
 
-var Bill = mongoose.model("Bill", campgroundSchema);
+var Bill = mongoose.model("Bill", byllSchema);
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
@@ -338,13 +338,22 @@ function receivedMessage(event) {
             case "results":
                 Bill.sort({price: 1});
                 Bill.find({}, function (error, results) {
-                    var sum = 0;
-                    var n = 0;
-                    results.forEach(function (result) {
-                        sum += result.price;
-                        n++;
-                    });
-                    var average = sum / n;
+                    if(!error && results.length > 2){
+                        var sum = 0;
+                        var n = 0;
+                        results.forEach(function (result) {
+                            sum += result.price;
+                            n++;
+                        });
+                        var average = sum / n;
+                        results.forEach(function (result) {
+
+                        });
+                    } else if(!error && results.length< 2){
+                        sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
+                    } else {
+                        sendTextMessage(senderID, error);
+                    }
 
                 });
                 break;
