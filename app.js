@@ -269,7 +269,7 @@ function receivedMessage(event) {
             case "db":
                 Campground.find({name:"Granite Hill"}, function (error, result) {
                     if(!error) {
-                        sendTextMessage(senderID, result.name);
+                        sendTextMessage(senderID, result[0].name);
                     } else{
                         sendTextMessage(senderID, error);
                     }
