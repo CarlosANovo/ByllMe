@@ -280,24 +280,24 @@ function receivedMessage(event) {
             // View your result using the m-variable.
             // eg m[0] etc.
 
-            // ADD USER or JUST ADD EXPENSE
-            sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
-        }
+			// ADD USER or JUST ADD EXPENSE
+			sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
+		}
 
 
-        re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
-        str = messageText;
-        var n;
+		re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
+		str = messageText;
+		var n;
 
-        if ((n = re.exec(str)) !== null) {
-            if (n.index === re.lastIndex) {
-                re.lastIndex++;
-            }
+		if ((n = re.exec(str)) !== null) {
+			if (n.index === re.lastIndex) {
+				re.lastIndex++;
+			}
 
-            // Remove expense or give warning
-            sendTextMessage(senderID, "I'll remove the expense of " + n[0] + ", for the value of " + n[2] + "€");
-        }
-
+			// Remove expense or give warning
+			sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
+		}
+		
 
         switch (messageText.toLowerCase()) {
             case "hi":
