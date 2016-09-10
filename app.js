@@ -92,7 +92,6 @@ app.get('/webhook', function (req, res) {
  * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
  *
  */
-var people = [];
 app.post('/webhook', function (req, res) {
     var data = req.body;
 
@@ -287,9 +286,15 @@ function receivedMessage(event) {
                 price: Number(m[3])
             };
             Bill.create(newUser);
+            Blog.findByIdAndUpdate(req.params.id, req.body.blog, function (error, blog) {
+                if (error) {
+                    res.redirect("/blogs");
+                } else {
+                    res.redirect("/blogs/" + req.params.id)
+                }
+            });
             return;
         }
-
 
 
         re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
@@ -300,7 +305,6 @@ function receivedMessage(event) {
             if (n.index === re.lastIndex) {
                 re.lastIndex++;
             }
-
             // Remove expense or give warning
             sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
         }
@@ -373,33 +377,29 @@ function receivedMessage(event) {
                 break;
 
             case "results":
+                Bill.find({}, function (error, results) {
+                        if (!error && results.length > 2) {
+                            var sum = 0;
+                            var n = 0;
+                            results.forEach(function (result) {
+                                sum += result.price;
+                                n++;
+                            });
+                            var average = sum / n;
+                            results.forEach(function (result) {
 
-                /*Bill.sort({price: 1}, function (error) {
-                 if (!error) {
-                 Bill.find({}, function (error, results) {
-                 if (!error && results.length > 2) {
-                 var sum = 0;
-                 var n = 0;
-                 results.forEach(function (result) {
-                 sum += result.price;
-                 n++;
-                 });
-                 var average = sum / n;
-                 results.forEach(function (result) {
+                            });
+                            sendTextMessage(senderID, "WORKING BIATCH!");
+                        } else if (!error && results.length == 2) {
+                            sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
+                        } else if (!error && results.length < 2) {
+                            sendTextMessage(senderID, "No split needed...");
+                        } else {
+                            sendTextMessage(senderID, error);
+                        }
 
-                 });
-                 sendTextMessage(senderID, "WORKING BIATCH!");
-                 } else if (!error && results.length == 2) {
-                 sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
-                 } else if (!error && results.length < 2) {
-                 sendTextMessage(senderID, "No split needed...");
-                 } else {
-                 sendTextMessage(senderID, error);
-                 }
-
-                 });
-                 }
-                 });*/
+                    }
+                );
 
                 break;
 
