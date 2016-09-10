@@ -272,7 +272,7 @@ function receivedMessage(event) {
 		var str = messageText;
 		var m;
  
-		if ((m = re.exec(str)) !== null) {
+		if ((m = re.exec(str)) !== 'undefined') {
 			if (m.index === re.lastIndex) {
 				re.lastIndex++;
 			}
@@ -288,7 +288,7 @@ function receivedMessage(event) {
 		var str = messageText;
 		var n;
  
-		if ((n = re.exec(str)) !== null) {
+		if ((n = re.exec(str)) !== 'undefined') {
 			if (n.index === re.lastIndex) {
 				re.lastIndex++;
 			}
