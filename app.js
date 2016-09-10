@@ -363,8 +363,8 @@ function receivedMessage(event) {
                 Bill.find({}, function (error, results) {
                     if (!error) {
                         results.forEach(function (result) {
-                            sendTextMessage(senderID, result.name);
-                        })
+                            sendTextMessage(senderID, "" + result.name);
+                        });
                     } else {
                         sendTextMessage(senderID, error);
                     }
