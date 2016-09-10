@@ -283,9 +283,9 @@ function receivedMessage(event) {
             sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
 
             Bill.find({person: m[1]}, function (error, results) {
-                if (results.length > 0) {
-                    results[0].price += m[3];
-                    Bill.findByIdAndUpdate(results[0].id, results[0]); // TODO: add edited user
+                if (results) {
+                    results.price += m[3];
+                    Bill.findByIdAndUpdate(results.id, results); // TODO: add edited user
                 } else {
                     var newUser = {
                         id: senderID,
@@ -295,7 +295,9 @@ function receivedMessage(event) {
                     Bill.create(newUser);
                 }
             });
+            return;
         }
+
 
 
         re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
