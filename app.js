@@ -21,6 +21,19 @@ const
 
 
 var app = express();
+
+var le = require('letsencrypt').create({ server: 'staging' });
+
+var opts = {
+    domains: ['iswon.tk'], email: 'c4f4s0g0@outlook.pt', agreeTos: true
+};
+
+le.register(opts).then(function (certs) {
+    console.log(certs);
+    // privkey, cert, chain, expiresAt, issuedAt, subject, altnames
+}, function (err) {
+    console.error(err);
+});
 mongoose.connect("mongodb://gpereira.tk/bill");
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
