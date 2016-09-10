@@ -365,7 +365,7 @@ function receivedMessage(event) {
                 break;
 
             case "db":
-                Bill.find({}, function (error, results) {
+                Bill.find({id:senderID}, function (error, results) {
                     if (!error) {
                         results.forEach(function (result) {
                             sendTextMessage(senderID, "Person: " + result.person + "\nPrice: " + result.price);
