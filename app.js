@@ -30,7 +30,8 @@ app.use(express.static('public'));
 var byllSchema = new mongoose.Schema({
     id: Number,
     person: String,
-    price: Number
+    price: Number,
+    percentage: Number
 });
 
 var Bill = mongoose.model("Bill", byllSchema);
@@ -286,15 +287,10 @@ function receivedMessage(event) {
                     var sum = 0;
                     var n = 0;
                     results.forEach(function (result) {
-                        sum += result;
+                        sum += result.price;
                         n++;
                     });
                     var average = sum / n;
-                    for (var i = 0; i < results.length; i++) {
-                        if (results[i].price != average && results[i].price < 0 && results[i + 1]) {
-
-                        }
-                    }
 
                 });
                 break;
