@@ -1,4 +1,4 @@
-# [**ByllMe**](https://www.messenger.com/t/ByllMe)
+# ![ByllMe Logo](https://github.com/CarlosANovo/ByllMe/blob/master/Byll.png)    [**ByllMe**](https://www.messenger.com/t/ByllMe)
 
 Meet your friends. Go out. Let **Byll** split the bills for you.
 
