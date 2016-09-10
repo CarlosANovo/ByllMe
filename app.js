@@ -30,7 +30,6 @@ app.use(express.static('public'));
 
 
 var byllSchema = new mongoose.Schema({
-    id: Number,
     person: String,
     price: Number
 });
@@ -281,7 +280,6 @@ function receivedMessage(event) {
             // ADD USER or JUST ADD EXPENSE
             sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
             var newUser = {
-                id: senderID,
                 person: m[1],
                 price: Number(m[3])
             };
