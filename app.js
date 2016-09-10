@@ -281,20 +281,12 @@ function receivedMessage(event) {
 
             // ADD USER or JUST ADD EXPENSE
             sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
-
-            Bill.find({person: m[1]}, function (error, results) {
-                if (results) {
-                    results.price += m[3];
-                    Bill.findByIdAndUpdate(results.id, results); // TODO: add edited user
-                } else {
-                    var newUser = {
-                        id: senderID,
-                        person: m[1],
-                        price: Number(m[3])
-                    };
-                    Bill.create(newUser);
-                }
-            });
+            var newUser = {
+                id: senderID,
+                person: m[1],
+                price: Number(m[3])
+            };
+            Bill.create(newUser);
             return;
         }
 
