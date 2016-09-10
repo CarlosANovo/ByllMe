@@ -271,7 +271,6 @@ function receivedMessage(event) {
 		var re = /^(.+?)\s(paid|spent)\s(.+?)€/; 
 		var str = messageText;
 		var m;
-		m[1] = "initial";
  
 		if ((m = re.exec(str)) !== null) {
 			if (m.index === re.lastIndex) {
@@ -280,24 +279,23 @@ function receivedMessage(event) {
 			// View your result using the m-variable.
 			// eg m[0] etc.
 		}
-		if (m[1]=="paid"||m[1]=="spent"){
+		if (m[1]){
 			// ADD USER or JUST ADD EXPENSE
 			sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
 		}
 		
 		var re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/; 
 		var str = messageText;
-		var m;
-		m[1] = "initial";
+		var n;
  
-		if ((m = re.exec(str)) !== null) {
-			if (m.index === re.lastIndex) {
+		if ((n = re.exec(str)) !== null) {
+			if (n.index === re.lastIndex) {
 				re.lastIndex++;
 			}
 		}
-		if (m[1]=="didn't pay"||m[1]=="didn't spend"){
+		if (n[1]){
 			// Remove expense or give warning
-			sendTextMessage(senderID, "I'll remove the expense of " + m[0] + ", for the value of " + m[2] + "€");
+			sendTextMessage(senderID, "I'll remove the expense of " + n[0] + ", for the value of " + n[2] + "€");
 		}
 		
 		
