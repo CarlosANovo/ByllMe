@@ -20,7 +20,7 @@ const
     mongoose = require("mongoose");
 
 var app = express();
-mongoose.connect("mongodb://gpereira.tk/Byll");
+mongoose.connect("mongodb://gpereira.tk/byll");
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({verify: verifyRequestSignature}));
@@ -268,58 +268,58 @@ function receivedMessage(event) {
         // the text we received.
 
         switch (messageText.toLowerCase()) {
-          case "hi":
-          case "hello":
-          case "hey":
-          case "good morning":
-          case "good evening":
-          case "good night":
-              sendTextMessage(senderID, "Hi! My name is Byll, I'm here to help you split your bills with your friends...");
-              sendTextMessage(senderID, "Type 'help' to see the words I understand :)");
-              break;
+            case "hi":
+            case "hello":
+            case "hey":
+            case "good morning":
+            case "good evening":
+            case "good night":
+                sendTextMessage(senderID, "Hi! My name is Byll, I'm here to help you split your bills with your friends...");
+                sendTextMessage(senderID, "Type 'help' to see the words I understand :)");
+                break;
 
-          case "help":
-          case "?":
-          case "commands":
-              sendTextMessage(senderID, "Type 'start' or 'begin' to start a new session. Record everyone's expenses and split the bill at the end.");
-              sendTextMessage(senderID, "Add your your friends by simply saying 'Add John', 'Mary paid 20€' or 'Steve spent 10.43€'... If you wish to add many people at once, type 'Add users'.");
-              sendTextMessage(senderID, "Remove someone with (for example) 'Remove Steve'.");
-              sendTextMessage(senderID, "Check the current status, and see how much money each user spent so far using 'stats' or 'current'.");
-              sendTextMessage(senderID, "Remove everything and start over with 'reset' or 'fresh start'.");
-              sendTextMessage(senderID, "When you're done, just 'split the bill'! ;)");
-              break;
+            case "help":
+            case "?":
+            case "commands":
+                sendTextMessage(senderID, "Type 'start' or 'begin' to start a new session. Record everyone's expenses and split the bill at the end.");
+                sendTextMessage(senderID, "Add your your friends by simply saying 'Add John', 'Mary paid 20€' or 'Steve spent 10.43€'... If you wish to add many people at once, type 'Add users'.");
+                sendTextMessage(senderID, "Remove someone with (for example) 'Remove Steve'.");
+                sendTextMessage(senderID, "Check the current status, and see how much money each user spent so far using 'stats' or 'current'.");
+                sendTextMessage(senderID, "Remove everything and start over with 'reset' or 'fresh start'.");
+                sendTextMessage(senderID, "When you're done, just 'split the bill'! ;)");
+                break;
 
-          case "start recording":
-          case "start":
-          case "begin":
-              // START A NEW SENDER ID ON DATABASE
-              /*
-              if it already exists:
-              sendTextMessage(senderID, "There's a session running already. Use 'reset' if you want to start over.");
-              */
+            case "start recording":
+            case "start":
+            case "begin":
+                // START A NEW SENDER ID ON DATABASE
+                /*
+                 if it already exists:
+                 sendTextMessage(senderID, "There's a session running already. Use 'reset' if you want to start over.");
+                 */
 
-              sendTextMessage(senderID, "I just started a new session :) Add users, or simply start adding expenses...");
-              break;
+                sendTextMessage(senderID, "I just started a new session :) Add users, or simply start adding expenses...");
+                break;
 
-          case "fresh start":
-          case "reset":
-              //Similar to start, but removes everything first
-              break;
+            case "fresh start":
+            case "reset":
+                //Similar to start, but removes everything first
+                break;
 
-          case "add users":
-          case "add user":
-              // Procedure to add multiple users at once...
-              break;
+            case "add users":
+            case "add user":
+                // Procedure to add multiple users at once...
+                break;
 
-          case "status":
-          case "stats":
-          case "current":
-              //Displays current status...
-              break;
+            case "status":
+            case "stats":
+            case "current":
+                //Displays current status...
+                break;
 
-          case "split the bill":
-              // ....
-              break;
+            case "split the bill":
+                // ....
+                break;
 
             case "db":
                 Bill.find({}, function (error, result) {
@@ -335,41 +335,15 @@ function receivedMessage(event) {
                 });
                 break;
 
-            case "results":
-                Bill.sort({price: 1});
-                Bill.find({}, function (error, results) {
-                    if(!error && results.length > 2){
-                        var sum = 0;
-                        var n = 0;
-                        results.forEach(function (result) {
-                            sum += result.price;
-                            n++;
-                        });
-                        var average = sum / n;
-                        results.forEach(function (result) {
 
-                        });
-                        sendTextMessage(senderID, "WORKING BIATCH!");
-                    } else if(!error && results.length == 2){
-                        sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
-                    } else if (!error && results.length < 2){
-                        sendTextMessage(senderID, "No split needed...");
-                    } else {
-                        sendTextMessage(senderID, error);
-                    }
 
-                });
-                break;
-				
-			default:
+            default:
                 sendTextMessage(senderID, "I'm not sure I understood that... Type 'help' to see the commands I understand.");
 
         }
     } else if (messageAttachments) {
         sendTextMessage(senderID, "I can't process attachments... Type 'help' to see the commands I understand.");
     }
-
-
 
 
 }
@@ -653,8 +627,8 @@ function sendGenericMessage(recipientId) {
                         }, {
                             type: "postback",
                             title: "Call Postback",
-                            payload: "Payload for first bubble",
-                        }],
+                            payload: "Payload for first bubble"
+                        }]
                     }, {
                         title: "touch",
                         subtitle: "Your Hands, Now in VR",
@@ -667,7 +641,7 @@ function sendGenericMessage(recipientId) {
                         }, {
                             type: "postback",
                             title: "Call Postback",
-                            payload: "Payload for second bubble",
+                            payload: "Payload for second bubble"
                         }]
                     }]
                 }
