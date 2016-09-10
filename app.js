@@ -279,7 +279,7 @@ function receivedMessage(event) {
 			// View your result using the m-variable.
 			// eg m[0] etc.
 		}
-		if (m[1]){
+		if (typeof m != NULL){
 			// ADD USER or JUST ADD EXPENSE
 			sendTextMessage(senderID, "I'll add an expense for " + m[0] + " for the value of " + m[2] + "€");
 		}
@@ -293,7 +293,7 @@ function receivedMessage(event) {
 				re.lastIndex++;
 			}
 		}
-		if (n[1]){
+		if (typeof n != NULL){
 			// Remove expense or give warning
 			sendTextMessage(senderID, "I'll remove the expense of " + n[0] + ", for the value of " + n[2] + "€");
 		}
