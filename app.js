@@ -28,12 +28,12 @@ app.use(express.static('public'));
 
 
 var byllSchema = new mongoose.Schema({
-    id: String,
-    image: String,
-    description: String
+    id: Number,
+    person: String,
+    price: Number
 });
 
-var Campground = mongoose.model("Campground", byllSchema);
+var Bill = mongoose.model("Bill", byllSchema);
 /*
  * Be sure to setup your config values before running this code. You can 
  * set them using environment variables or modifying the config file in /config.
@@ -266,16 +266,36 @@ function receivedMessage(event) {
         // keywords and send back the corresponding example. Otherwise, just echo
         // the text we received.
         switch (messageText) {
-            case "id":
-                sendTextMessage(senderID, senderID);
-                break;
             case "db":
-                Campground.find({name:"Granite Hill"}, function (error, result) {
-                    if(!error) {
-                        sendTextMessage(senderID, result[0].name);
-                    } else{
+                Bill.find({}, function (error, result) {
+                    if (!error) {
+                        Bill.find({}, function (error, results) {
+                            results.forEach(function (result) {
+                                sendTextMessage(senderID, result.name);
+                            })
+                        });
+                    } else {
                         sendTextMessage(senderID, error);
                     }
+                });
+                break;
+
+            case "results":
+                Bill.sort({price: 1});
+                Bill.find({}, function (error, results) {
+                    var sum = 0;
+                    var n = 0;
+                    results.forEach(function (result) {
+                        sum += result;
+                        n++;
+                    });
+                    var average = sum / n;
+                    for (var i = 0; i < results.length; i++) {
+                        if (results[i].price != average && results[i].price < 0 && results[i + 1]) {
+
+                        }
+                    }
+
                 });
                 break;
 
