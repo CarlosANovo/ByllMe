@@ -279,30 +279,38 @@ function receivedMessage(event) {
             // View your result using the m-variable.
             // eg m[0] etc.
 
-			// ADD USER or JUST ADD EXPENSE
-			sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
-            var newUser = {
-                id: senderID,
-                person: m[1],
-                price: Number(m[3])
-            };
-            Bill.create(newUser);
-		}
+            // ADD USER or JUST ADD EXPENSE
+            sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
+
+            Bill.find({person: m[1]}, function (error, results) {
+                if (results.length > 0) {
+                    results[0].price += m[3];
+                    Bill.findByIdAndUpdate(results[0].id, results[0]); // TODO: add edited user
+                } else {
+                    var newUser = {
+                        id: senderID,
+                        person: m[1],
+                        price: Number(m[3])
+                    };
+                    Bill.create(newUser);
+                }
+            });
+        }
 
 
-		re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
-		str = messageText;
-		var n;
+        re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
+        str = messageText;
+        var n;
 
-		if ((n = re.exec(str)) !== null) {
-			if (n.index === re.lastIndex) {
-				re.lastIndex++;
-			}
+        if ((n = re.exec(str)) !== null) {
+            if (n.index === re.lastIndex) {
+                re.lastIndex++;
+            }
 
-			// Remove expense or give warning
-			sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
-		}
-		
+            // Remove expense or give warning
+            sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
+        }
+
 
         switch (messageText.toLowerCase()) {
             case "hi":
@@ -362,7 +370,7 @@ function receivedMessage(event) {
                 Bill.find({}, function (error, results) {
                     if (!error) {
                         results.forEach(function (result) {
-                            sendTextMessage(senderID, "" + result.person);
+                            sendTextMessage(senderID, "Person: " + result.person + "\nPrice: " + result.price);
                         });
                     } else {
                         sendTextMessage(senderID, error);
