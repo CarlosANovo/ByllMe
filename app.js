@@ -281,7 +281,9 @@ function receivedMessage(event) {
             case "help":
             case "?":
             case "commands":
-                sendTextMessage(senderID, "Type 'start' or 'begin' to start a new session. Record everyone's expenses and split the bill at the end.<br>Add your your friends by simply saying 'Add John', 'Mary paid 20€' or 'Steve spent 10.43€'... If you wish to add many people at once, type 'Add users'.<br>Remove someone with (for example) 'Remove Steve'.<br>Check the current status, and see how much money each user spent so far using 'stats' or 'current'.<br>Remove everything and start over with 'reset' or 'fresh start'.<br>When you're done, just 'split the bill'! ;)");
+                sendTextMessage(senderID, "Type 'start' or 'begin' to start a new session. Record everyone's expenses and split the bill at the end. Add your your friends by simply saying 'Add John', 'Mary paid 20€' or 'Steve spent 10.43€'... If you wish to add many people at once, type 'Add users'.");
+				sendTextMessage(senderID, "Remove someone with (for example) 'Remove Steve'. Check the current status, and see how much money each user spent so far using 'stats' or 'current'. Delete everything and start over with 'reset' or 'fresh start'. When you're done, just 'split the bill'! ;)");
+				
                 break;
 
             case "start recording":
