@@ -37,13 +37,6 @@ var byllSchema = new mongoose.Schema({
 });
 
 var Bill = mongoose.model("Bill", byllSchema);
-
-Bill.create({
-    id: 45656,
-    person: "Biatch",
-    price: 4846,
-    percentage: 45
-});
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
