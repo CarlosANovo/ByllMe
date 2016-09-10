@@ -350,8 +350,10 @@ function receivedMessage(event) {
 
                         });
                         sendTextMessage(senderID, "WORKING BIATCH!");
-                    } else if(!error && results.length< 2){
+                    } else if(!error && results.length == 2){
                         sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
+                    } else if (!error && results.length < 2){
+                        sendTextMessage(senderID, "No split needed...");
                     } else {
                         sendTextMessage(senderID, error);
                     }
