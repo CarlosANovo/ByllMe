@@ -279,26 +279,33 @@ function receivedMessage(event) {
             // eg m[0] etc.
 
             // ADD USER or JUST ADD EXPENSE
-            sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
+            sendTextMessage(senderID, "An expense was added to " + m[1] + " for the value of " + m[3] + "€");
 			
-			Bill.find({ id: senderID, person: m[1]}, function (error, docs){
+			Bill.findOne({ id: senderID, person: m[1] }, function (error, docs){
 					if(error){
-						sendTextMessage(senderID, "ERROR");
+						// Output to log
 					} else if (docs){
-						sendTextMessage(senderID, "Current status:" + docs.price);
-					} else {
-						sendTextMessage(senderID, "Nothing found...");
+						
+						if (typeof docs.price == "undefined"){
+							// User doesn't exist
+							
+							var newUser = {
+								id: senderID,
+								person: m[1],
+								price: Number(m[3])
+							};
+							
+							Bill.create(newUser);
+						} else {
+							// User already exists, update
+							Bill.findOneAndUpdate({ id: senderID, person: m[1] }, { price: Number(m[3]+docs.price) }, function (err, docu) {} );
+						}
 					}
-				});			
+				});
+			Bill.findOne({ id: senderID, person: m[1] }, function (error, docs){
+				sendTextMessage(senderID, "Current status for " + m[1] + ": " + docs.price + "€");
+			});
 			
-			/*
-            var newUser = {
-                id: senderID,
-                person: m[1],
-                price: Number(m[3])
-            };
-            Bill.create(newUser);
-			*/
 			
 			/*
             Blog.findByIdAndUpdate(req.params.id, req.body.blog, function (error, blog) {
