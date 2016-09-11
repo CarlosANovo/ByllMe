@@ -298,7 +298,7 @@ function receivedMessage(event) {
 							Bill.create(newUser);
 						} else {
 							// User already exists, update
-							Bill.findOneAndUpdate({ id: senderID, person: m[1] }, { price: Number(m[3]+docs.price) }, function (err, docu) {} );
+							Bill.findOneAndUpdate({ id: senderID, person: m[1] }, { price: Number(m[3])+Number(docs.price) }, function (err, docu) {} );
 						}
 					}
 				});
