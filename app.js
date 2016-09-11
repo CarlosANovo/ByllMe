@@ -302,10 +302,23 @@ function receivedMessage(event) {
 						}
 					}
 				});
+			/*
 			Bill.findOne({ id: senderID, person: m[1] }, function (error, docs){
 				sendTextMessage(senderID, "Current status for " + m[1] + ": " + docs.price + "€");	// IT DOESN'T SHOW THE CURRENT, BUT RATHER THE PREVIOUS STATE
 			});
+			*/
 			
+			Bill.findOne({ id: senderID, person: m[1] }, function (error, docs){
+				if (error){
+					//Output error
+				} else if (docs) {
+					if (typeof docs.price == "undefined"){
+						sendTextMessage(senderID, "I don't think I know who " + m[1] + " is.");
+					} else {
+						sendTextMessage(senderID, "Current status for " + m[1] + ": " + docs.price + "€");	// IT DOESN'T SHOW THE CURRENT, BUT RATHER THE PREVIOUS STATE
+					}
+				}
+			});
 			
 			/*
             Blog.findByIdAndUpdate(req.params.id, req.body.blog, function (error, blog) {
@@ -347,10 +360,24 @@ function receivedMessage(event) {
 						}
 					}
 				});
+			/*
 			Bill.findOne({ id: senderID, person: n[1] }, function (error, docs){
 				sendTextMessage(senderID, "Current status for " + n[1] + ": " + docs.price + "€");  // IT DOESN'T SHOW THE CURRENT, BUT RATHER THE PREVIOUS STATE
 			});
+			*/
 			
+			Bill.findOne({ id: senderID, person: n[1] }, function (error, docs){
+				if (error){
+					//Output error
+				} else if (docs) {
+					if (typeof docs.price == "undefined"){
+						sendTextMessage(senderID, "I don't think I know who " + n[1] + " is.");
+					} else {
+						sendTextMessage(senderID, "Current status for " + n[1] + ": " + docs.price + "€");	// IT DOESN'T SHOW THE CURRENT, BUT RATHER THE PREVIOUS STATE
+					}
+				}
+			});
+			return;
             // Remove expense or give warning
         }
 
