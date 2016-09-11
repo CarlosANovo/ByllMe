@@ -286,6 +286,7 @@ function receivedMessage(event) {
                 price: Number(m[3])
             };
             Bill.create(newUser);
+			/*
             Blog.findByIdAndUpdate(req.params.id, req.body.blog, function (error, blog) {
                 if (error) {
                     res.redirect("/blogs");
@@ -293,6 +294,7 @@ function receivedMessage(event) {
                     res.redirect("/blogs/" + req.params.id)
                 }
             });
+			*/
             return;
         }
 
