@@ -256,9 +256,9 @@ function receivedMessage(event) {
         var quickReplyPayload = quickReply.payload;
         console.log("Quick reply for message %s with payload %s",
             messageId, quickReplyPayload);
-
-        sendTextMessage(senderID, "Quick reply tapped");
-        return;
+        messageText = quickReply.toString();
+        //sendTextMessage(senderID, "Quick reply tapped");
+        //return;
     }
 
     if (messageText) {
