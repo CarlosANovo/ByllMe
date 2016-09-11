@@ -561,7 +561,7 @@ function receivedMessage(event) {
                             console.log("Não precisa de divisão");
                         }
                         else {
-                            sendTextMessage(senderID, error);
+                            sendTextMessage(senderID,""+ error);
                             console.log("EROOOOORR");
                         }
                     });
