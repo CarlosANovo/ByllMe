@@ -4,6 +4,7 @@
     <list default="true" id="a7e0a02d-7e2f-4b5a-8fbb-0e6e9037b814" name="Default" comment="YesNoIDK">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
+    <list id="10488252-76d3-4872-a66d-16a5bdfe49df" name="Failed commit: Default" comment="YesNoIDK" />
     <ignored path="ByllMe.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -29,8 +30,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="511" column="60" selection-start-line="511" selection-start-column="60" selection-end-line="511" selection-end-column="60" />
+            <state relative-caret-position="478">
+              <caret line="564" column="50" selection-start-line="564" selection-start-column="50" selection-end-line="564" selection-end-column="50" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -206,35 +207,7 @@
       <workItem from="1473519649280" duration="23519000" />
       <workItem from="1473595576404" duration="3000" />
       <workItem from="1473597741731" duration="1099000" />
-      <workItem from="1473599040738" duration="3723000" />
-    </task>
-    <task id="LOCAL-00007" summary="things">
-      <created>1473515375178</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1473515375178</updated>
-    </task>
-    <task id="LOCAL-00008" summary="another update">
-      <created>1473521905583</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1473521905583</updated>
-    </task>
-    <task id="LOCAL-00009" summary="another update">
-      <created>1473523007250</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1473523007250</updated>
-    </task>
-    <task id="LOCAL-00010" summary="check if results is working">
-      <created>1473523386598</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1473523386598</updated>
+      <workItem from="1473599040738" duration="4252000" />
     </task>
     <task id="LOCAL-00011" summary="results more clear">
       <created>1473523559086</created>
@@ -551,11 +524,39 @@
       <option name="project" value="LOCAL" />
       <updated>1473602768684</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="YesNoIDK">
+      <created>1473602776706</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1473602776706</updated>
+    </task>
+    <task id="LOCAL-00057" summary="YesNoIDK">
+      <created>1473602905848</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1473602905848</updated>
+    </task>
+    <task id="LOCAL-00058" summary="YesNoIDK">
+      <created>1473603013621</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1473603013621</updated>
+    </task>
+    <task id="LOCAL-00059" summary="logs">
+      <created>1473603302785</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1473603302786</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37187000" />
+    <option name="totallyTimeSpent" value="37716000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -625,7 +626,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <MESSAGE value="remove results" />
     <MESSAGE value="remove databse conversations" />
     <MESSAGE value="server name fixed" />
     <MESSAGE value="test db" />
@@ -650,13 +650,18 @@
     <MESSAGE value="greetings" />
     <MESSAGE value="YesNo" />
     <MESSAGE value="YesNoIDK" />
-    <option name="LAST_COMMIT_MESSAGE" value="YesNoIDK" />
+    <MESSAGE value="logs" />
+    <option name="LAST_COMMIT_MESSAGE" value="logs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app.js">
@@ -742,8 +747,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="511" column="60" selection-start-line="511" selection-start-column="60" selection-end-line="511" selection-end-column="60" />
+        <state relative-caret-position="478">
+          <caret line="564" column="50" selection-start-line="564" selection-start-column="50" selection-end-line="564" selection-end-column="50" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
