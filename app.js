@@ -477,6 +477,7 @@ function receivedMessage(event) {
             case "split the bill":
             case "results":
                 Bill.find({}, function (error, results) {
+                    sendTextMessage(senderID, results.length);
                         if (!error && results.length > 2) {
                             var sum = 0;
                             var n = 0;
