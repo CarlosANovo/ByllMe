@@ -500,16 +500,16 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
-                            for (var i = 0; typeof results[i].price != "undefined" && i < results.length; i++) {
+                            for (var i = 0; typeof results[i] != "undefined" && i < results.length; i++) {
                                 results[i].price = results[i].price - average;
                                 results[i].paywho = [];
                                 results[i].payhowmuch = [];
                             }
 
                             for (var i = 0; i < results.length; i++) {
-                                if (typeof results[i].price != "undefined" && results[i].price != 0 && results[i].price < 0) {
-                                    for (var j = i + 1; typeof results[j].price != "undefined" && j < results.length; j++) {
-                                        if (typeof results[j].price != "undefined" && typeof results[i].price != "undefined" && Math.abs(results[i].price) < results[j].price && results[j].price > 0) {
+                                if (typeof results[i] != "undefined" && results[i].price != 0 && results[i].price < 0) {
+                                    for (var j = i + 1; typeof results[j] != "undefined" && j < results.length; j++) {
+                                        if (typeof results[j] != "undefined" && typeof results[i] != "undefined" && Math.abs(results[i].price) < results[j].price && results[j].price > 0) {
                                             var prov = results[j].price;
                                             results[j].price += results[i].price;
                                             results[i].price = 0;
@@ -517,7 +517,7 @@ function receivedMessage(event) {
                                             results[i].payhowmuch[1] = prov;
                                         }
                                     }
-                                    while (typeof results[i].price != "undefined" && results[i].price < 0) {
+                                    while (typeof results[i] != "undefined" && results[i].price < 0) {
                                         var k = 0;
                                         var difpag = Math.abs(results[i].price);
                                         var difrece = results[j].price;
