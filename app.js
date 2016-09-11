@@ -362,13 +362,13 @@ function receivedMessage(event) {
 							if (Number(docs.price) < Number(n[3])){
 								sendTextMessage(senderID, n[1] +" never paid that much in the first place. Use another value.");
 							} else {
-								Bill.findOneAndUpdate({ id: senderID, person: n[1] }, { price: Number(docs.price)-Number(n[3]) }, function (err, docu) {
+								setTimeout(Bill.findOneAndUpdate({ id: senderID, person: n[1] }, { price: Number(docs.price)-Number(n[3]) }, function (err, docu) {
 									if (err){
 										//Output error
 									} else if (docu) {
-										setTimeout(sendTextMessage(senderID, "Current status for " + docu.person + ": " + docu.price + "€"),1000);
+										sendTextMessage(senderID, "Current status for " + docu.person + ": " + docu.price + "€");
 									}
-								} );
+								} ),3000);
 								sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
 							}
 						}
