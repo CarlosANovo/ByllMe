@@ -256,7 +256,7 @@ function receivedMessage(event) {
         var quickReplyPayload = quickReply.payload;
         console.log("Quick reply for message %s with payload %s",
             messageId, quickReplyPayload);
-        messageText = quickReply.title;
+        messageText = quickReplyPayload.toString();
         //sendTextMessage(senderID, "Quick reply tapped");
         //return;
     }
@@ -451,6 +451,11 @@ function receivedMessage(event) {
             case "fresh start":
             case "reset":
                 //Similar to start, but removes everything first
+                Bill.delete({id: senderID}, function (error) {
+                    if (error) {
+                        console.log(error);
+                    }
+                });
                 break;
 
             case "add users":
@@ -953,17 +958,17 @@ function sendQuickYesNo(recipientId) {
                 {
                     "content_type": "text",
                     "title": "Help",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+                    "payload": "help"
                 },
                 {
                     "content_type": "text",
                     "title": "Stats",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+                    "payload": "stats"
                 },
                 {
                     "content_type": "text",
                     "title": "Split the bill",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+                    "payload": "split the bill"
                 }
             ]
         }
