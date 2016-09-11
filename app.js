@@ -554,12 +554,15 @@ function receivedMessage(event) {
                         }
                         else if (!error && number == 2) {
                             sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
+                            console.log("2 gajos");
                         }
                         else if (!error && number < 2) {
                             sendTextMessage(senderID, "No split needed...");
+                            console.log("Não precisa de divisão");
                         }
                         else {
                             sendTextMessage(senderID, error);
+                            console.log("EROOOOORR");
                         }
                     });
                     console.log("FIM");
