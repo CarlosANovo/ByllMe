@@ -491,7 +491,7 @@ function receivedMessage(event) {
                             });
                             if (n != 0) var average = sum / n;
                             for (var i = 0; typeof results[i].price != "undefined" && i < results.length; i++) {
-                                for (var j = 0; typeof results[j].price !== "undefined" && j < results.length; j++) {
+                                for (var j = 0; typeof results[j].price != "undefined" && j < results.length; j++) {
                                     if (results[i].price > results[j].price) {
                                         var prov = results[j];
                                         results[j] = results[i];
