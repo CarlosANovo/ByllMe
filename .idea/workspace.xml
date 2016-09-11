@@ -29,8 +29,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="258" column="33" selection-start-line="258" selection-start-column="33" selection-end-line="258" selection-end-column="33" />
+            <state relative-caret-position="458">
+              <caret line="257" column="42" selection-start-line="257" selection-start-column="42" selection-end-line="257" selection-end-column="42" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -344,7 +344,7 @@
       <workItem from="1473506964534" duration="8843000" />
       <workItem from="1473519649280" duration="23519000" />
       <workItem from="1473595576404" duration="3000" />
-      <workItem from="1473597741731" duration="1320000" />
+      <workItem from="1473597741731" duration="1664000" />
     </task>
     <task id="LOCAL-00001" summary="Clean responses">
       <created>1473507305171</created>
@@ -640,11 +640,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473598855791</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Menu">
+      <created>1473599071796</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1473599071796</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33685000" />
+    <option name="totallyTimeSpent" value="34029000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -704,7 +711,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="remove results" />
     <MESSAGE value="remove databse conversations" />
     <MESSAGE value="server name fixed" />
     <MESSAGE value="test db" />
@@ -729,7 +735,8 @@
     <MESSAGE value="greetings" />
     <MESSAGE value="YesNo" />
     <MESSAGE value="O cacho é nabo..." />
-    <option name="LAST_COMMIT_MESSAGE" value="O cacho é nabo..." />
+    <MESSAGE value="Menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Menu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -801,8 +808,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="258" column="33" selection-start-line="258" selection-start-column="33" selection-end-line="258" selection-end-column="33" />
+        <state relative-caret-position="458">
+          <caret line="257" column="42" selection-start-line="257" selection-start-column="42" selection-end-line="257" selection-end-column="42" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
