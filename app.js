@@ -451,6 +451,11 @@ function receivedMessage(event) {
             case "fresh start":
             case "reset":
                 //Similar to start, but removes everything first
+                Bill.delete({id: senderID}, function (error) {
+                    if (error) {
+                        console.log(error);
+                    }
+                });
                 break;
 
             case "add users":
