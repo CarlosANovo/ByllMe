@@ -366,7 +366,7 @@ function receivedMessage(event) {
 									if (err){
 										//Output error
 									} else if (docu) {
-										sendTextMessage(senderID, "Current status for " + docu.person + ": " + docu.price + "€");
+										setTimeout(sendTextMessage(senderID, "Current status for " + docu.person + ": " + docu.price + "€"),1000);
 									}
 								} );
 								sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
