@@ -485,8 +485,8 @@ function receivedMessage(event) {
                                 n++;
                             });
                             if (n != 0) var average = sum / n;
-                            for (var i = 0; i < results.length; i++) {
-                                for (var j = 0; j < results.length; j++) {
+                            for (var i = 0; typeof results[i].price != "undefined" && i < results.length; i++) {
+                                for (var j = 0; typeof results[j].price != "undefined" && j < results.length; j++) {
                                     if (results[i].price > results[j].price) {
                                         var prov = results[j];
                                         results[j] = results[i];
@@ -494,16 +494,16 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
-                            for (var i = 0; i < results.length; i++) {
+                            for (var i = 0; typeof results[i].price != "undefined" && i < results.length; i++) {
                                 results[i].price = results[i].price - average;
                                 results[i].paywho = [];
                                 results[i].payhowmuch = [];
                             }
 
                             for (var i = 0; i < results.length; i++) {
-                                if (results[i].price != 0 && results[i].price < 0) {
-                                    for (var j = i + 1; j < results.length; j++) {
-                                        if (Math.abs(results[i].price) < results[j].price && results[j].price > 0) {
+                                if (typeof results[i].price != "undefined" && results[i].price != 0 && results[i].price < 0) {
+                                    for (var j = i + 1; typeof results[j].price != "undefined" && j < results.length; j++) {
+                                        if (typeof results[j].price != "undefined" && typeof results[i].price != "undefined" && Math.abs(results[i].price) < results[j].price && results[j].price > 0) {
                                             var prov = results[j].price;
                                             results[j].price += results[i].price;
                                             results[i].price = 0;
@@ -511,7 +511,7 @@ function receivedMessage(event) {
                                             results[i].payhowmuch[1] = prov;
                                         }
                                     }
-                                    while (results[i].price < 0) {
+                                    while (typeof results[i].price != "undefined" && results[i].price < 0) {
                                         var k = 0;
                                         var difpag = Math.abs(results[i].price);
                                         var difrece = results[j].price;
@@ -531,11 +531,11 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
-                            for (var i = 0; i < results.length; i++) {
+                            for (var i = 0; typeof results[i].price != "undefined" && i < results.length; i++) {
                                 var k = 0;
-                                for (var j = 0; j < payhowmuch.lenght; j++) {
+                                for (var j = 0; typeof results[i].payhowmuch[j] != "undefined" && j < payhowmuch.length; j++) {
                                     sendTextMessage(senderID, results[i].person + " needs to pay " + results[i].payhowmuch[j] + "€ to " + results[i].paywho[j]);
-                                    if (payhowmuch.lenght > k) {
+                                    if (payhowmuch.length > k) {
                                         sendTextMessage(senderID, "and " + results[i].payhowmuch[j] + " € to " + results[i].paywho[j]);
                                     }
                                     k--;
