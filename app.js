@@ -493,12 +493,13 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
+                            sendTextMessage(senderID, "Ordered");
                             for (var i = 0; i = results.length; i++) {
                                 results[i].price = results[i].price - average;
                                 results[i].paywho = [];
                                 results[i].payhowmuch = [];
                             }
-
+                            sendTextMessage(senderID, "Balanced");
                             for (var i = 0; i < results.length; i++) {
                                 if (results[i].price != 0 && results[i].price < 0) {
                                     for (var j = i + 1; j < results.length; j++) {
@@ -530,6 +531,7 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
+                            sendTextMessage(senderID, "Calculated");
                             for (var i = 0; i < results.length; i++) {
                                 var k = 0;
                                 for (var j = 0; j < payhowmuch.lenght; j++) {
