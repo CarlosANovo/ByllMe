@@ -548,7 +548,7 @@ function receivedMessage(event) {
                                 }
                             }
                         }
-                        else if (!error && results.length == 2) {
+                        if (!error && results.length == 2) {
                             sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
                         }
                         else if (!error && results.length < 2) {
