@@ -421,18 +421,19 @@ function receivedMessage(event) {
             case "good night":
             case "good night.":
             case "good night!":
-                sendTextMessage(senderID, "Hi! My name is Byll, I'm here to help you split your bills with your friends... Type 'help' to see the words I understand :)");
+                sendQuickYesNo(senderID);
+                // sendTextMessage(senderID, "Hi! My name is Byll, I'm here to help you split your bills with your friends... Type 'help' to see the words I understand :)");
                 break;
 
             case "help":
             case "?":
             case "commands":
-                sendTextMessage(senderID, "Type 'start' or 'begin' to start a new session. Record everyone's expenses and split the bill at the end. Add your your friends by simply saying 'Add John', 'Mary paid 20€' or 'Steve spent 10.43€'... When you're done, just 'split the bill'! ;) ('help2' for more)");
+                sendTextMessage(senderID, "Type 'start' or 'begin' to start a new session. Record everyone's expenses and split the bill at the end. Add your your friends by simply saying 'Mary paid 20€' or even 'Steve spent 0€'... When you're done, just 'split the bill'! ;) ('help2' for more)");
                 break;
 
             case "help2":
             case "?2":
-                sendTextMessage(senderID, "If you wish to add many people at once, type 'Add users'. Remove someone with (for example) 'Remove Steve' and remove expenses with 'John didn't pay 10€'. Check the current status, and see how much money each user spent so far using 'stats' or 'current'. Delete everything and start over with 'reset' or 'fresh start'.");
+                sendTextMessage(senderID, "Remove someone with (for example) 'Remove Steve' and remove expenses with 'John didn't pay 10€'. Check the current status, and see how much money each user spent so far using 'stats' or 'current'. Delete everything and start over with 'reset' or 'fresh start'.");
                 break;
 
             case "start recording":
