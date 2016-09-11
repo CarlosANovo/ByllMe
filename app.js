@@ -537,7 +537,7 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
-                            for (var i = 0; typeof results[i].price != "undefined" && i < results.length; i++) {
+                            for (var i = 0; typeof results[i] != "undefined" && i < results.length; i++) {
                                 var k = 0;
                                 for (var j = 0; typeof results[i].payhowmuch[j] != "undefined" && j < payhowmuch.length; j++) {
                                     sendTextMessage(senderID, results[i].person + " needs to pay " + results[i].payhowmuch[j] + "€ to " + results[i].paywho[j]);
