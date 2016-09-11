@@ -517,7 +517,7 @@ function receivedMessage(event) {
                                             results[i].payhowmuch[1] = prov;
                                         }
                                     }
-                                    while (typeof results[i] != "undefined" && results[i].price < 0) {
+                                    while (typeof results[i] != "undefined" && typeof results[j] != "undefined" && results[i].price < 0) {
                                         var k = 0;
                                         var difpag = Math.abs(results[i].price);
                                         var difrece = results[j].price;
