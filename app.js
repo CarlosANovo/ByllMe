@@ -303,7 +303,7 @@ function receivedMessage(event) {
 					}
 				});
 			Bill.findOne({ id: senderID, person: m[1] }, function (error, docs){
-				sendTextMessage(senderID, "Current status for " + m[1] + ": " + docs.price + "€");
+				sendTextMessage(senderID, "Current status for " + m[1] + ": " + docs.price + "€");	// IT DOESN'T SHOW THE CURRENT, BUT RATHER THE PREVIOUS STATE
 			});
 			
 			
@@ -348,7 +348,7 @@ function receivedMessage(event) {
 					}
 				});
 			Bill.findOne({ id: senderID, person: n[1] }, function (error, docs){
-				sendTextMessage(senderID, "Current status for " + n[1] + ": " + docs.price + "€");
+				sendTextMessage(senderID, "Current status for " + n[1] + ": " + docs.price + "€");  // IT DOESN'T SHOW THE CURRENT, BUT RATHER THE PREVIOUS STATE
 			});
 			
             // Remove expense or give warning
