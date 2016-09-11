@@ -570,7 +570,7 @@ function receivedMessage(event) {
                     console.log(e);
                 }
 */
-                sendTextMessage(senderID, "Feature not available yey, stay tuned for future updates :D");
+                sendTextMessage(senderID, "Feature not available yet, stay tuned for future updates :D");
                 break;
 
             default:

@@ -31,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
-              <caret line="572" column="102" selection-start-line="572" selection-start-column="102" selection-end-line="572" selection-end-column="102" />
+              <caret line="572" column="68" selection-start-line="572" selection-start-column="68" selection-end-line="572" selection-end-column="68" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -214,14 +214,7 @@
       <workItem from="1473597741731" duration="1099000" />
       <workItem from="1473599040738" duration="1904000" />
       <workItem from="1473601711082" duration="1079000" />
-      <workItem from="1473603591109" duration="393000" />
-    </task>
-    <task id="LOCAL-00005" summary="bug fix">
-      <created>1473510871659</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1473510871659</updated>
+      <workItem from="1473603591109" duration="463000" />
     </task>
     <task id="LOCAL-00006" summary="ID check">
       <created>1473511188957</created>
@@ -559,11 +552,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473603820007</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="results closed">
+      <created>1473603993528</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1473603993528</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36840000" />
+    <option name="totallyTimeSpent" value="36910000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -631,7 +631,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test db" />
     <MESSAGE value="it is working now" />
     <MESSAGE value="remove db" />
     <MESSAGE value="db start" />
@@ -656,7 +655,8 @@
     <MESSAGE value="try this" />
     <MESSAGE value="catch it" />
     <MESSAGE value="else" />
-    <option name="LAST_COMMIT_MESSAGE" value="else" />
+    <MESSAGE value="results closed" />
+    <option name="LAST_COMMIT_MESSAGE" value="results closed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -785,7 +785,7 @@
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
-          <caret line="572" column="102" selection-start-line="572" selection-start-column="102" selection-end-line="572" selection-end-column="102" />
+          <caret line="572" column="68" selection-start-line="572" selection-start-column="68" selection-end-line="572" selection-end-column="68" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
