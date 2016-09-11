@@ -483,16 +483,16 @@ function receivedMessage(event) {
             case "results":
                 try {
                     Bill.find({}, function (error, results) {
-                        if (!error && results.length > 2) {
+                        if (!error && typeof results[i] != "undefined" > 2) {
                             var sum = 0;
-                            var n = 0;
+                            var number = 0;
                             results.forEach(function (result) {
                                 sum += result.price;
-                                n++;
+                                number++;
                             });
                             if (n != 0) var average = sum / n;
-                            for (var i = 0; typeof results[i] != "undefined" && i < results.length; i++) {
-                                for (var j = 0; typeof results[j] != "undefined" && j < results.length; j++) {
+                            for (var i = 0; typeof results[i] != "undefined" && i < number; i++) {
+                                for (var j = 0; typeof results[j] != "undefined" && j < number; j++) {
                                     if (results[i].price > results[j].price) {
                                         var prov = results[j];
                                         results[j] = results[i];
@@ -500,15 +500,15 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
-                            for (var i = 0; typeof results[i] != "undefined" && i < results.length; i++) {
+                            for (var i = 0; typeof results[i] != "undefined" && i < number; i++) {
                                 results[i].price = results[i].price - average;
                                 results[i].paywho = [];
                                 results[i].payhowmuch = [];
                             }
 
-                            for (var i = 0; i < results.length; i++) {
+                            for (var i = 0; i < number; i++) {
                                 if (typeof results[i] != "undefined" && results[i].price != 0 && results[i].price < 0) {
-                                    for (var j = i + 1; typeof results[j] != "undefined" && j < results.length; j++) {
+                                    for (var j = i + 1; typeof results[j] != "undefined" && j < number; j++) {
                                         if (typeof results[j] != "undefined" && typeof results[i] != "undefined" && Math.abs(results[i].price) < results[j].price && results[j].price > 0) {
                                             var prov = results[j].price;
                                             results[j].price += results[i].price;
@@ -537,7 +537,7 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
-                            for (var i = 0; typeof results[i] != "undefined" && i < results.length; i++) {
+                            for (var i = 0; typeof results[i] != "undefined" && i < number; i++) {
                                 var k = 0;
                                 for (var j = 0; typeof results[i].payhowmuch[j] != "undefined" && j < payhowmuch.length; j++) {
                                     sendTextMessage(senderID, results[i].person + " needs to pay " + results[i].payhowmuch[j] + "€ to " + results[i].paywho[j]);
@@ -548,10 +548,10 @@ function receivedMessage(event) {
                                 }
                             }
                         }
-                        else if (!error && results.length == 2) {
+                        else if (!error && number == 2) {
                             sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
                         }
-                        else if (!error && results.length < 2) {
+                        else if (!error && number < 2) {
                             sendTextMessage(senderID, "No split needed...");
                         }
                         else {
