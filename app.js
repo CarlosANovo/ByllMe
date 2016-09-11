@@ -281,7 +281,7 @@ function receivedMessage(event) {
             // ADD USER or JUST ADD EXPENSE
             sendTextMessage(senderID, "An expense was added to " + m[1] + " for the value of " + m[3] + "€");
 			
-			Bill.findOne({ id: senderID, person: m[1].toLowerCase }, function (error, docs){
+			Bill.findOne({ id: senderID, person: m[1].toLowerCase() }, function (error, docs){
 					if(error){
 						// Output to log
 					} else if (docs){
@@ -291,18 +291,18 @@ function receivedMessage(event) {
 							// Create user
 							var newUser = {
 								id: senderID,
-								person: m[1].toLowerCase,
+								person: m[1].toLowerCase(),
 								price: Number(m[3])
 							};
 							
 							Bill.create(newUser);
 						} else {
 							// User already exists, update
-							Bill.findOneAndUpdate({ id: senderID, person: m[1].toLowerCase }, { price: Number(m[3])+Number(docs.price) }, function (err, docu) {} );
+							Bill.findOneAndUpdate({ id: senderID, person: m[1].toLowerCase() }, { price: Number(m[3])+Number(docs.price) }, function (err, docu) {} );
 						}
 					}
 				});
-			Bill.findOne({ id: senderID, person: m[1].toLowerCase }, function (error, docs){
+			Bill.findOne({ id: senderID, person: m[1].toLowerCase() }, function (error, docs){
 				sendTextMessage(senderID, "Current status for " + m[1] + ": " + docs.price + "€");
 			});
 			
@@ -329,7 +329,7 @@ function receivedMessage(event) {
                 re.lastIndex++;
             }
 			
-			Bill.findOne({ id: senderID, person: n[1].toLowerCase }, function (error, docs){
+			Bill.findOne({ id: senderID, person: n[1].toLowerCase() }, function (error, docs){
 					if(error){
 						// Output to log
 					} else if (docs){
@@ -341,13 +341,13 @@ function receivedMessage(event) {
 							if (Number(docs.price) < Number(n[3])){
 								sendTextMessage(senderID, n[1] +" never paid that much in the first place. Use another value.");
 							} else {
-								Bill.findOneAndUpdate({ id: senderID, person: n[1].toLowerCase }, { price: Number(docs.price)-Number(n[3]) }, function (err, docu) {} );
+								Bill.findOneAndUpdate({ id: senderID, person: n[1].toLowerCase() }, { price: Number(docs.price)-Number(n[3]) }, function (err, docu) {} );
 								sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
 							}
 						}
 					}
 				});
-			Bill.findOne({ id: senderID, person: n[1].toLowerCase }, function (error, docs){
+			Bill.findOne({ id: senderID, person: n[1].toLowerCase() }, function (error, docs){
 				sendTextMessage(senderID, "Current status for " + n[1] + ": " + docs.price + "€");
 			});
 			
