@@ -540,6 +540,7 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
+                            console.log("pagamentos");
                             for (var i = 0; typeof results[i] != "undefined" && i < number; i++) {
                                 var k = 0;
                                 for (var j = 0; typeof results[i].payhowmuch[j] != "undefined" && j < payhowmuch.length; j++) {
