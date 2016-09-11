@@ -457,7 +457,7 @@ function receivedMessage(event) {
                 Bill.find({id:senderID}, function (error, results) {
                     if (!error) {
                         results.forEach(function (result) {
-                            sendTextMessage(senderID, result.person + " - ammount paid so far: " + result.price);
+                            sendTextMessage(senderID, result.person + " - paid " + result.price + "€ (so far)");
                         });
                     } else {
                         sendTextMessage(senderID, error);
