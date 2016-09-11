@@ -506,7 +506,79 @@ function receivedMessage(event) {
                                     results[i].paywho = [];
                                     results[i].payhowmuch = [];
                                 }
+                Bill.find({}, function (error, results) {
+                    sendTextMessage(senderID, results.length);
+                        if (!error && results.length > 2) {
+                            var sum = 0;
+                            var n = 0;
+                            results.forEach(function (result) {
+                                sum += result.price;
+                                n++;
+                            });
+                            if (n != 0) var average = sum / n;
+                            for (var i = 0; typeof results[i] != "undefined" && i < results.length; i++) {
+                                for (var j = 0; typeof results[j] != "undefined" && j < results.length; j++) {
+                                    if (results[i].price > results[j].price) {
+                                        var prov = results[j];
+                                        results[j] = results[i];
+                                        results[i] = prov;
+                                    }
+                                }
+                            }
+                            for (var i = 0; typeof results[i] != "undefined" && i < results.length; i++) {
+                                results[i].price = results[i].price - average;
+                                results[i].paywho = [];
+                                results[i].payhowmuch = [];
+                            }
 
+                            for (var i = 0; i < results.length; i++) {
+                                if (typeof results[i] != "undefined" && results[i].price != 0 && results[i].price < 0) {
+                                    for (var j = i + 1; typeof results[j] != "undefined" && j < results.length; j++) {
+                                        if (typeof results[j] != "undefined" && typeof results[i] != "undefined" && Math.abs(results[i].price) < results[j].price && results[j].price > 0) {
+                                            var prov = results[j].price;
+                                            results[j].price += results[i].price;
+                                            results[i].price = 0;
+                                            results[i].paywho[1] = results[j].person;
+                                            results[i].payhowmuch[1] = prov;
+                                        }
+                                    }
+                                    while (typeof results[i] != "undefined" && results[i].price < 0) {
+                                        var k = 0;
+                                        var difpag = Math.abs(results[i].price);
+                                        var difrece = results[j].price;
+                                        if (difpag > difrece) {
+                                            results[j].price += results[i].price;
+                                            results[i].price = 0;
+                                            results[i].payhowmuch[k] = difpag;
+                                        }
+                                        else {
+                                            results[i].price += difrece;
+                                            results[j].price = 0;
+                                            results[i].payhowmuch[k] = difrece;
+                                        }
+                                        results[i].paywho[k] = results[j].person;
+                                        j--;
+                                        k++;
+                                    }
+                                }
+                            }
+                            for (var i = 0; typeof results[i].price != "undefined" && i < results.length; i++) {
+                                var k = 0;
+                                for (var j = 0; typeof results[i].payhowmuch[j] != "undefined" && j < payhowmuch.length; j++) {
+                                    sendTextMessage(senderID, results[i].person + " needs to pay " + results[i].payhowmuch[j] + "€ to " + results[i].paywho[j]);
+                                    if (payhowmuch.length > k) {
+                                        sendTextMessage(senderID, "and " + results[i].payhowmuch[j] + " € to " + results[i].paywho[j]);
+                                    }
+                                    k--;
+                                }
+                            }
+                        } else if (!error && results.length == 2) {
+                            sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
+                        } else if (!error && results.length < 2) {
+                            sendTextMessage(senderID, "No split needed...");
+                        } else {
+                            sendTextMessage(senderID, error);
+                        }
                                 for (var i = 0; i < results.length; i++) {
                                     if (typeof results[i].price != "undefined" && results[i].price != 0 && results[i].price < 0) {
                                         for (var j = i + 1; typeof results[j].price != "undefined" && j < results.length; j++) {
