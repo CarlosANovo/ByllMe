@@ -558,6 +558,8 @@ function receivedMessage(event) {
 
                         }
                     );
+                } catch (e){
+                    console.log(e);
                 }
 
                 break;

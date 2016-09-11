@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7e0a02d-7e2f-4b5a-8fbb-0e6e9037b814" name="Default" comment="fresh start">
+    <list default="true" id="a7e0a02d-7e2f-4b5a-8fbb-0e6e9037b814" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
     </list>
@@ -29,8 +29,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="560" column="17" selection-start-line="560" selection-start-column="17" selection-end-line="560" selection-end-column="17" />
+            <state relative-caret-position="410">
+              <caret line="561" column="35" selection-start-line="561" selection-start-column="35" selection-end-line="561" selection-end-column="35" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -344,7 +344,7 @@
       <workItem from="1473506964534" duration="8843000" />
       <workItem from="1473519649280" duration="23519000" />
       <workItem from="1473595576404" duration="3000" />
-      <workItem from="1473597741731" duration="3123000" />
+      <workItem from="1473597741731" duration="3260000" />
     </task>
     <task id="LOCAL-00001" summary="Clean responses">
       <created>1473507305171</created>
@@ -668,11 +668,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473600375445</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="try only">
+      <created>1473600873439</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1473600873439</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35488000" />
+    <option name="totallyTimeSpent" value="35625000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -683,7 +690,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14734562" sideWeight="0.5063966" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35536295" sideWeight="0.4936034" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35536295" sideWeight="0.4936034" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -732,7 +739,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test db" />
     <MESSAGE value="it is working now" />
     <MESSAGE value="remove db" />
     <MESSAGE value="db start" />
@@ -757,7 +763,8 @@
     <MESSAGE value="Menu" />
     <MESSAGE value="changed a String" />
     <MESSAGE value="fresh start" />
-    <option name="LAST_COMMIT_MESSAGE" value="fresh start" />
+    <MESSAGE value="try only" />
+    <option name="LAST_COMMIT_MESSAGE" value="try only" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -829,8 +836,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="560" column="17" selection-start-line="560" selection-start-column="17" selection-end-line="560" selection-end-column="17" />
+        <state relative-caret-position="410">
+          <caret line="561" column="35" selection-start-line="561" selection-start-column="35" selection-end-line="561" selection-end-column="35" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
