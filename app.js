@@ -562,6 +562,7 @@ function receivedMessage(event) {
                             sendTextMessage(senderID, error);
                         }
                     });
+                    console.log("FIM");
                 } catch (e) {
                     console.log(e);
                 }
