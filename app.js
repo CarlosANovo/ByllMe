@@ -362,7 +362,13 @@ function receivedMessage(event) {
 							if (Number(docs.price) < Number(n[3])){
 								sendTextMessage(senderID, n[1] +" never paid that much in the first place. Use another value.");
 							} else {
-								Bill.findOneAndUpdate({ id: senderID, person: n[1] }, { price: Number(docs.price)-Number(n[3]) }, function (err, docu) {} );
+								Bill.findOneAndUpdate({ id: senderID, person: n[1] }, { price: Number(docs.price)-Number(n[3]) }, function (err, docu) {
+									if (err){
+										//Output error
+									} else if (docu) {
+										sendTextMessage(senderID, "Current status for " + docu.person + ": " + docu.price + "€");
+									}
+								} );
 								sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
 							}
 						}
@@ -375,7 +381,7 @@ function receivedMessage(event) {
 				sendTextMessage(senderID, "Current status for " + n[1] + ": " + docs.price + "€");  // IT DOESN'T SHOW THE CURRENT, BUT RATHER THE PREVIOUS STATE
 			});
 			*/
-			
+			/*
 			Bill.findOne({ id: senderID, person: n[1] }, function (error, docs){
 				if (error){
 					//Output error
@@ -387,6 +393,7 @@ function receivedMessage(event) {
 					}
 				}
 			});
+			*/
 			return;
             // Remove expense or give warning
         }
