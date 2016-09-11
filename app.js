@@ -279,7 +279,7 @@ function receivedMessage(event) {
             // eg m[0] etc.
 
             // ADD USER or JUST ADD EXPENSE
-            sendTextMessage(senderID, "An expense was added to " + m[1] + " for the value of " + m[3] + "€");
+            sendTextMessage(senderID, "An expense was added to " + m[1] + " for the value of " + m[3] + "€. To check current status use 'stats'.");
 			
 			Bill.findOne({ id: senderID, person: m[1] }, function (error, docs){
 					if(error){
@@ -315,7 +315,7 @@ function receivedMessage(event) {
 				sendTextMessage(senderID, "Current status for " + m[1] + ": " + docs.price + "€");	// IT DOESN'T SHOW THE CURRENT, BUT RATHER THE PREVIOUS STATE
 			});
 			*/
-			
+			/*
 			Bill.findOne({ id: senderID, person: m[1] }, function (error, docs){
 				if (error){
 					//Output error
@@ -327,7 +327,7 @@ function receivedMessage(event) {
 					}
 				}
 			});
-			
+			*/
 			/*
             Blog.findByIdAndUpdate(req.params.id, req.body.blog, function (error, blog) {
                 if (error) {
@@ -362,14 +362,8 @@ function receivedMessage(event) {
 							if (Number(docs.price) < Number(n[3])){
 								sendTextMessage(senderID, n[1] +" never paid that much in the first place. Use another value.");
 							} else {
-								setTimeout(Bill.findOneAndUpdate({ id: senderID, person: n[1] }, { price: Number(docs.price)-Number(n[3]) }, function (err, docu) {
-									if (err){
-										//Output error
-									} else if (docu) {
-										sendTextMessage(senderID, "Current status for " + docu.person + ": " + docu.price + "€");
-									}
-								} ),3000);
-								sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
+								Bill.findOneAndUpdate({ id: senderID, person: n[1] }, { price: Number(docs.price)-Number(n[3]) }, function (err, docu) {} );
+								sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€. To check current status use 'stats'.");
 							}
 						}
 					} else {
@@ -455,22 +449,15 @@ function receivedMessage(event) {
 
                 // Procedure to add multiple users at once...
                 break;
-
-            case "status":
+			
+			case "status":
             case "stats":
             case "current":
-                //Displays current status...
-                break;
-
-            case "split the bill":
-                // ....
-                break;
-
             case "db":
                 Bill.find({id:senderID}, function (error, results) {
                     if (!error) {
                         results.forEach(function (result) {
-                            sendTextMessage(senderID, "Person: " + result.person + "\nPrice: " + result.price);
+                            sendTextMessage(senderID, result.person + " - ammount paid so far: " + result.price);
                         });
                     } else {
                         sendTextMessage(senderID, error);
@@ -478,6 +465,7 @@ function receivedMessage(event) {
                 });
                 break;
 
+			case "split the bill":
             case "results":
                 Bill.find({}, function (error, results) {
                         if (!error && results.length > 2) {
