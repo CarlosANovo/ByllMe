@@ -300,6 +300,14 @@ function receivedMessage(event) {
 							// User already exists, update
 							Bill.findOneAndUpdate({ id: senderID, person: m[1] }, { price: Number(m[3])+Number(docs.price) }, function (err, docu) {} );
 						}
+					} else {
+						var newUser = {
+							id: senderID,
+							person: m[1],
+							price: Number(m[3])
+						};
+						
+						Bill.create(newUser);
 					}
 				});
 			/*
@@ -358,6 +366,8 @@ function receivedMessage(event) {
 								sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
 							}
 						}
+					} else {
+						sendTextMessage(senderID, "I don't think I know who "+ n[1] +" is.");
 					}
 				});
 			/*
