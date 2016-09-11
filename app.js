@@ -482,6 +482,7 @@ function receivedMessage(event) {
             case "split the bill":
             case "results":
                 try {
+                    console.log("Tentativa");
                     Bill.find({}, function (error, results) {
                         if (!error && typeof results[i] != "undefined" > 2) {
                             var sum = 0;
@@ -490,6 +491,7 @@ function receivedMessage(event) {
                                 sum += result.price;
                                 number++;
                             });
+                            console.log("avg");
                             if (n != 0) var average = sum / n;
                             for (var i = 0; typeof results[i] != "undefined" && i < number; i++) {
                                 for (var j = 0; typeof results[j] != "undefined" && j < number; j++) {
@@ -500,12 +502,13 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
+                            console.log("ordem");
                             for (var i = 0; typeof results[i] != "undefined" && i < number; i++) {
                                 results[i].price = results[i].price - average;
                                 results[i].paywho = [];
                                 results[i].payhowmuch = [];
                             }
-
+                            console.log("avg");
                             for (var i = 0; i < number; i++) {
                                 if (typeof results[i] != "undefined" && results[i].price != 0 && results[i].price < 0) {
                                     for (var j = i + 1; typeof results[j] != "undefined" && j < number; j++) {
