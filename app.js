@@ -494,7 +494,7 @@ function receivedMessage(event) {
                                     }
                                 }
                             }
-                            for (var i = 0; i = results.length; i++) {
+                            for (var i = 0; i < results.length; i++) {
                                 results[i].price = results[i].price - average;
                                 results[i].paywho = [];
                                 results[i].payhowmuch = [];
