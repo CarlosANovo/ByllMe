@@ -19,8 +19,10 @@ const
     request = require('request'),
     mongoose = require("mongoose");
 
+
 var app = express();
-mongoose.connect("mongodb://gpereira.tk/byll");
+
+mongoose.connect("mongodb://gpereira.tk/bill");
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({verify: verifyRequestSignature}));
@@ -30,8 +32,7 @@ app.use(express.static('public'));
 var byllSchema = new mongoose.Schema({
     id: Number,
     person: String,
-    price: Number,
-    percentage: Number
+    price: Number
 });
 
 var Bill = mongoose.model("Bill", byllSchema);
@@ -91,7 +92,6 @@ app.get('/webhook', function (req, res) {
  * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
  *
  */
-var people = [];
 app.post('/webhook', function (req, res) {
     var data = req.body;
 
@@ -267,6 +267,59 @@ function receivedMessage(event) {
         // keywords and send back the corresponding example. Otherwise, just echo
         // the text we received.
 
+        var re = /^(.+?)\s(paid|spent)\s(.+?)€/;
+        var str = messageText;
+        var m;
+
+        if ((m = re.exec(str)) !== null) {
+            if (m.index === re.lastIndex) {
+                re.lastIndex++;
+            }
+            // View your result using the m-variable.
+            // eg m[0] etc.
+
+            // ADD USER or JUST ADD EXPENSE
+            sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
+
+            Bill.find({id: senderID, person:m[1]}, function (error, result) {
+                if(result){
+                    var old_price = result[0].price;
+                    Bill.delete({id: senderID, person: m[1]}, function (error, result) {
+                       if(!error){
+                           var newUser = {
+                               id: senderID,
+                               person: m[1],
+                               price: old_price + Number(m[3])
+                           };
+                           Bill.create(newUser);
+                       }
+                    });
+                } else {
+                    var newUser = {
+                        id: senderID,
+                        person: m[1],
+                        price: Number(m[3])
+                    };
+                    Bill.create(newUser);
+                }
+            });
+            return;
+        }
+
+
+        re = /^(.+?)\s(didn't pay|didn't spend)\s(.+?)€/;
+        str = messageText;
+        var n;
+
+        if ((n = re.exec(str)) !== null) {
+            if (n.index === re.lastIndex) {
+                re.lastIndex++;
+            }
+            // Remove expense or give warning
+            sendTextMessage(senderID, "I'll remove the expense of " + n[1] + ", for the value of " + n[3] + "€");
+        }
+
+
         switch (messageText.toLowerCase()) {
             case "hi":
             case "hello":
@@ -281,11 +334,11 @@ function receivedMessage(event) {
             case "?":
             case "commands":
                 sendTextMessage(senderID, "Type 'start' or 'begin' to start a new session. Record everyone's expenses and split the bill at the end. Add your your friends by simply saying 'Add John', 'Mary paid 20€' or 'Steve spent 10.43€'... When you're done, just 'split the bill'! ;) ('help2' for more)");
-				break;
-				
-			case "help2":
-			case "?2":
-				sendTextMessage(senderID, "If you wish to add many people at once, type 'Add users'. Remove someone with (for example) 'Remove Steve' and remove expenses with 'John didn't pay 10€'. Check the current status, and see how much money each user spent so far using 'stats' or 'current'. Delete everything and start over with 'reset' or 'fresh start'.");
+                break;
+
+            case "help2":
+            case "?2":
+                sendTextMessage(senderID, "If you wish to add many people at once, type 'Add users'. Remove someone with (for example) 'Remove Steve' and remove expenses with 'John didn't pay 10€'. Check the current status, and see how much money each user spent so far using 'stats' or 'current'. Delete everything and start over with 'reset' or 'fresh start'.");
                 break;
 
             case "start recording":
@@ -307,6 +360,7 @@ function receivedMessage(event) {
 
             case "add users":
             case "add user":
+
                 // Procedure to add multiple users at once...
                 break;
 
@@ -319,14 +373,12 @@ function receivedMessage(event) {
             case "split the bill":
                 // ....
                 break;
-		
+
             case "db":
-                Bill.find({}, function (error, result) {
+                Bill.find({id:senderID}, function (error, results) {
                     if (!error) {
-                        Bill.find({}, function (error, results) {
-                            results.forEach(function (result) {
-                                sendTextMessage(senderID, result.name);
-                            })
+                        results.forEach(function (result) {
+                            sendTextMessage(senderID, "Person: " + result.person + "\nPrice: " + result.price);
                         });
                     } else {
                         sendTextMessage(senderID, error);
@@ -335,32 +387,72 @@ function receivedMessage(event) {
                 break;
 
             case "results":
-                Bill.sort({price: 1}, function (error) {
-                    if (!error) {
-                        Bill.find({}, function (error, results) {
-                            if (!error && results.length > 2) {
-                                var sum = 0;
-                                var n = 0;
-                                results.forEach(function (result) {
-                                    sum += result.price;
-                                    n++;
-                                });
-                                var average = sum / n;
-                                results.forEach(function (result) {
-
-                                });
-                                sendTextMessage(senderID, "WORKING BIATCH!");
-                            } else if (!error && results.length == 2) {
-                                sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
-                            } else if (!error && results.length < 2) {
-                                sendTextMessage(senderID, "No split needed...");
-                            } else {
-                                sendTextMessage(senderID, error);
+                Bill.find({}, function (error, results) {
+                        if (!error && results.length > 2) {
+                            var sum = 0;
+                            var n = 0;
+                            results.forEach(function (result) {
+                                sum += result.price;
+                                n++;
+                            });
+                            var average = sum / n;
+                            for (var i = 0; i < results.length; i++) {
+                                for (var j = 0; j < results.length; j++) {
+                                    if (results[i].price > results[j].price) {
+                                        var prov = results[j];
+                                        results[j] = results[i];
+                                        results[i] = prov;
+                                    }
+                                }
+                            }
+                            for (var i = 0; i = results.length; i++) {
+                                results[i].price = results[i].price - average;
+                                results[i].paywho = [];
+                                results[i].payhowmuch = [];
                             }
 
-                        });
+                            for (var i = 0; i < results.length; i++){
+                               if (results[i].price != 0 && results[i].price < 0) {
+                                   for (var j = i + 1; j < results.length; j++) {
+                                       if (math.abs(results[i].price) < results[j].price && results[j].price > 0) {
+                                           var prov = results[j].price;
+                                           results[j].price += results[i].price;
+                                           results[i].price = 0;
+                                           results[i].paywho[1] = results[j].person;
+                                           results[i].payhowmuch[1] = prov;
+                                       }
+                                   }
+                                   while (results[i].price < 0) {
+                                       var k = 0;
+                                       var difpag = -results[i].price;
+                                       var difrece = results[j].price;
+                                       if (difpag > difrece) {
+                                           results[j].price += results[i].price;
+                                           results[i].price = 0;
+                                           results[i].payhowmuch[k] = difpag;
+                                       }
+                                       else {
+                                           results[i].price += difrece;
+                                           results[j] = 0;
+                                           results[i].payhowmuch[k] = difrece;
+                                       }
+                                       results[i].paywho[k] = results[j].person;
+                                       j--;
+                                       k++;
+                                   }
+                               }
+                           }
+                            sendTextMessage(senderID, "WORKING BIATCH!");
+                        } else if (!error && results.length == 2) {
+                            sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
+                        } else if (!error && results.length < 2) {
+                            sendTextMessage(senderID, "No split needed...");
+                        } else {
+                            sendTextMessage(senderID, error);
+                        }
+
                     }
-                });
+                );
 
                 break;
 
