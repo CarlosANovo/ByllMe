@@ -285,7 +285,7 @@ function receivedMessage(event) {
 					if(error){
 						sendTextMessage(senderID, "ERROR");
 					} else if (docs){
-						sendTextMessage(senderID, docs.price);
+						sendTextMessage(senderID, "Current status:" + docs.price);
 					} else {
 						sendTextMessage(senderID, "Nothing found...");
 					}
