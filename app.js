@@ -421,18 +421,19 @@ function receivedMessage(event) {
             case "good night":
             case "good night.":
             case "good night!":
-                sendTextMessage(senderID, "Hi! My name is Byll, I'm here to help you split your bills with your friends... Type 'help' to see the words I understand :)");
+                sendQuickYesNo(senderID);
+                // sendTextMessage(senderID, "Hi! My name is Byll, I'm here to help you split your bills with your friends... Type 'help' to see the words I understand :)");
                 break;
 
             case "help":
             case "?":
             case "commands":
-                sendTextMessage(senderID, "Type 'start' or 'begin' to start a new session. Record everyone's expenses and split the bill at the end. Add your your friends by simply saying 'Add John', 'Mary paid 20€' or 'Steve spent 10.43€'... When you're done, just 'split the bill'! ;) ('help2' for more)");
+                sendTextMessage(senderID, "Type 'start' or 'begin' to start a new session. Record everyone's expenses and split the bill at the end. Add your your friends by simply saying 'Mary paid 20€' or even 'Steve spent 0€'... When you're done, just 'split the bill'! ;) ('help2' for more)");
                 break;
 
             case "help2":
             case "?2":
-                sendTextMessage(senderID, "If you wish to add many people at once, type 'Add users'. Remove someone with (for example) 'Remove Steve' and remove expenses with 'John didn't pay 10€'. Check the current status, and see how much money each user spent so far using 'stats' or 'current'. Delete everything and start over with 'reset' or 'fresh start'.");
+                sendTextMessage(senderID, "Remove someone with (for example) 'Remove Steve' and remove expenses with 'John didn't pay 10€'. Check the current status, and see how much money each user spent so far using 'stats' or 'current'. Delete everything and start over with 'reset' or 'fresh start'.");
                 break;
 
             case "start recording":
@@ -940,6 +941,38 @@ function sendReceiptMessage(recipientId) {
  * Send a message with Quick Reply buttons.
  *
  */
+
+function sendQuickYesNo(recipientId) {
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        message: {
+            text: "Hi! My name is Byll, I'm here to help you split your bills with your friends... Type 'help' to see the words I understand :)",
+            metadata: "DEVELOPER_DEFINED_METADATA",
+            quick_replies: [
+                {
+                    "content_type": "text",
+                    "title": "Help",
+                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Stats",
+                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Split the bill",
+                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+                }
+            ]
+        }
+    };
+
+    callSendAPI(messageData);
+}
+
 function sendQuickReply(recipientId) {
     var messageData = {
         recipient: {
