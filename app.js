@@ -287,8 +287,7 @@ function receivedMessage(event) {
 					} else {
 						sendTextMessage(senderID, docs[0].price);
 					}
-				}
-			});			
+				});			
 			
 			/*
             var newUser = {
