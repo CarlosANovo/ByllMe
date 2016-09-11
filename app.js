@@ -552,7 +552,7 @@ function receivedMessage(event) {
                                 }
                             }
                         }
-                        if (!error && number == 2) {
+                        if (!error && number == 3) {
                             sendTextMessage(senderID, "Just give the money to the other guy! You are just two!");
                             console.log("2 gajos");
                         }
