@@ -481,7 +481,7 @@ function receivedMessage(event) {
 
             case "split the bill":
             case "results":
-                try {
+                /*try {
                     console.log("Tentativa");
                     Bill.find({}, function (error, results) {
                         if (!error && typeof results[i] != "undefined" > 2) {
@@ -569,7 +569,8 @@ function receivedMessage(event) {
                 } catch (e) {
                     console.log(e);
                 }
-
+*/
+                sendTextMessage(senderID, "Feature not available yey, stay tuned for future updates :D");
                 break;
 
             default:
