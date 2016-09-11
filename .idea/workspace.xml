@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7e0a02d-7e2f-4b5a-8fbb-0e6e9037b814" name="Default" comment="Database Update">
+    <list default="true" id="a7e0a02d-7e2f-4b5a-8fbb-0e6e9037b814" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
     </list>
@@ -29,8 +29,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="847">
-              <caret line="459" column="22" selection-start-line="459" selection-start-column="22" selection-end-line="459" selection-end-column="22" />
+            <state relative-caret-position="818">
+              <caret line="971" column="1" selection-start-line="971" selection-start-column="1" selection-end-line="971" selection-end-column="1" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -344,7 +344,7 @@
       <workItem from="1473506964534" duration="8843000" />
       <workItem from="1473519649280" duration="23519000" />
       <workItem from="1473595576404" duration="3000" />
-      <workItem from="1473597741731" duration="602000" />
+      <workItem from="1473597741731" duration="652000" />
     </task>
     <task id="LOCAL-00001" summary="Clean responses">
       <created>1473507305171</created>
@@ -619,11 +619,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473597973647</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="greetings">
+      <created>1473598353123</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1473598353123</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32967000" />
+    <option name="totallyTimeSpent" value="33017000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -683,7 +690,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Remove results to identify the problem" />
     <MESSAGE value="fix results" />
     <MESSAGE value="MongoDB port" />
     <MESSAGE value="remove results" />
@@ -708,7 +714,8 @@
     <MESSAGE value="coisas" />
     <MESSAGE value="Database Update" />
     <MESSAGE value="Split the bill" />
-    <option name="LAST_COMMIT_MESSAGE" value="Split the bill" />
+    <MESSAGE value="greetings" />
+    <option name="LAST_COMMIT_MESSAGE" value="greetings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -780,8 +787,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="847">
-          <caret line="459" column="22" selection-start-line="459" selection-start-column="22" selection-end-line="459" selection-end-column="22" />
+        <state relative-caret-position="818">
+          <caret line="971" column="1" selection-start-line="971" selection-start-column="1" selection-end-line="971" selection-end-column="1" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

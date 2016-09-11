@@ -939,6 +939,38 @@ function sendReceiptMessage(recipientId) {
  * Send a message with Quick Reply buttons.
  *
  */
+
+function sendQuickYesNo(recipientId) {
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        message: {
+            text: "Hi! My name is Byll, I'm here to help you split your bills with your friends... Type 'help' to see the words I understand :)",
+            metadata: "DEVELOPER_DEFINED_METADATA",
+            quick_replies: [
+                {
+                    "content_type": "text",
+                    "title": "Help",
+                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Stats",
+                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Split the bill",
+                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+                }
+            ]
+        }
+    };
+
+    callSendAPI(messageData);
+}
+
 function sendQuickReply(recipientId) {
     var messageData = {
         recipient: {
