@@ -284,8 +284,8 @@ function receivedMessage(event) {
 			Bill.find({ id: senderID, person: m[1]}, function (error, docs){
 					if(error){
 						sendTextMessage(senderID, "ERROR");
-					} else {
-						sendTextMessage(senderID, docs[0].price);
+					} else if (docs){
+						sendTextMessage(senderID, docs.price);
 					}
 				});			
 			
