@@ -280,12 +280,25 @@ function receivedMessage(event) {
 
             // ADD USER or JUST ADD EXPENSE
             sendTextMessage(senderID, "I'll add an expense for " + m[1] + " for the value of " + m[3] + "€");
+			
+			Bill.find({ id: senderID, person: m[1]}, function (error, docs){
+					if(error){
+						sendTextMessage(senderID, "ERROR");
+					} else {
+						sendTextMessage(senderID, docs[0].price);
+					}
+				}
+			});			
+			
+			/*
             var newUser = {
                 id: senderID,
                 person: m[1],
                 price: Number(m[3])
             };
             Bill.create(newUser);
+			*/
+			
 			/*
             Blog.findByIdAndUpdate(req.params.id, req.body.blog, function (error, blog) {
                 if (error) {
@@ -314,11 +327,24 @@ function receivedMessage(event) {
 
         switch (messageText.toLowerCase()) {
             case "hi":
+			case "hi.":
+			case "hi...":
+			case "hi!":
             case "hello":
+			case "hello.":
+			case "hello...":
+			case "hello!":
             case "hey":
+			case "hey!":
             case "good morning":
+			case "good morning.":
+			case "good morning!":
             case "good evening":
+			case "good evening!":
+			case "good evening.":
             case "good night":
+			case "good night.":
+			case "good night!":
                 sendTextMessage(senderID, "Hi! My name is Byll, I'm here to help you split your bills with your friends... Type 'help' to see the words I understand :)");
                 break;
 
